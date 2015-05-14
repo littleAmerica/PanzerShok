@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	}
 
 	//load bitmap
-	SDL_Surface *bmp = SDL_LoadBMP("helloworld.jpg");
+	SDL_Surface *bmp = SDL_LoadBMP("tank.bmp");
 	if (bmp == nullptr){
 		std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
 		return 6;
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	SDL_RenderCopy(ren, tex, NULL, NULL);
 	SDL_RenderPresent(ren);
 
-	SDL_Delay(2000);
+	SDL_Delay(20000);
 
 
 	return 0;

@@ -30,6 +30,7 @@
 # Visual studio shit
 *.opensdf
 *.suo
+*.sdf
 
 
 out

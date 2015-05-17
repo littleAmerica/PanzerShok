@@ -27,8 +27,13 @@
 *.out
 *.app
 
-projects/Debug
+# Visual studio shit
+*.opensdf
+*.suo
+
+
 out
+temp
 
 
 

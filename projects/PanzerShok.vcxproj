@@ -14,11 +14,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Event.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\Event.h" />
     <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5F4EDDEA-1FFA-4682-8C36-275ED3986E64}</ProjectGuid>

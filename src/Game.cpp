@@ -116,3 +116,8 @@ bool Game::initSDL()
 	return true;
 }
 
+void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
+{
+
+}
+

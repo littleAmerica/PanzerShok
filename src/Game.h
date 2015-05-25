@@ -4,6 +4,7 @@
 #include <string>
 
 #include "SDL.h"
+#include "Box2D.h"
 
 #include "Texture.h"
 #include "Event.h"
@@ -26,6 +27,7 @@ private:
 
 	//lower Game routine
 	bool initSDL();
+	bool initBox2D();
 
 
 	virtual void OnExit();
@@ -44,6 +46,7 @@ private:
 	int				m_height;
 
 	Texture		text;
+	b2World* m_world;
 };
 
 #endif

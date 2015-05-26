@@ -38,7 +38,7 @@ void Game::init()
 		m_running = true;
 	
 	text.SetRenderer(m_pRenderer);
-	text.loadImage("E:\\Projects\\PanzerShok\\resource\\tank1.png");
+	text.loadImage(".\\resource\\tank1.png");
 }
 
 void Game::render()
@@ -80,7 +80,6 @@ bool Game::running()
 void Game::OnExit()
 {
 	m_running = false;
-	delete m_world;
 }
 
 
@@ -120,13 +119,5 @@ bool Game::initSDL()
 void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 {
 
-}
-
-bool Game::initBox2D()
-{
-	b2Vec2 gravity;
-	gravity.Set(0.0f, 0.0f);
-	
-	m_world = new b2World(gravity);
 }
 

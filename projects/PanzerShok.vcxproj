@@ -17,11 +17,13 @@
     <ClCompile Include="..\src\Event.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\PhysEngine.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Event.h" />
     <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\PhysEngine.h" />
     <ClInclude Include="..\src\Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

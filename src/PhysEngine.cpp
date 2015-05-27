@@ -1,10 +1,15 @@
 #include "PhysEngine.h"
 
 
+template<> void anFill<PhysEngine>(An<PhysEngine>& physEngine)
+{
+	PhysEngine& pe = PhysEngine::Instance();
+	physEngine = &pe;
+}
+
 PhysEngine& PhysEngine::Instance()
 {
 	static PhysEngine instance;
-
 	return instance;
 }
 
@@ -32,7 +37,7 @@ void PhysEngine::init()
 }
 
 
-void PhysEngine::Dispose()
+void PhysEngine::clean()
 {
 	delete m_world;
 }

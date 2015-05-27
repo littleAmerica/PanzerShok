@@ -3,11 +3,11 @@
 
 #include <string>
 
-#include "SDL.h"
-
-
 #include "Texture.h"
 #include "Event.h"
+
+#include "RenderEngine.h"
+#include "PhysEngine.h"
 
 class Game : private Event
 {
@@ -25,18 +25,15 @@ private:
 	void clean();
 	bool running();
 
-	//lower Game routine
-	bool initSDL();
-
 
 	virtual void OnExit();
 	virtual void OnKeyDown(SDL_Keycode sym, Uint16 mod);
 
 	bool			m_running;
 
-	SDL_Window*		m_pWindow;
-	SDL_Renderer*	m_pRenderer;
-	SDL_Surface*	m_Surface;
+	An<PhysEngine>	m_physEngine;
+	An<RenderEngine> m_renderEngine;
+
 
 	std::string		m_name;
 	int				m_xpos;

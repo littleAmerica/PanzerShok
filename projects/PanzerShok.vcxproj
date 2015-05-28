@@ -21,6 +21,7 @@
     <ClCompile Include="..\src\PhysEngine.cpp" />
     <ClCompile Include="..\src\RenderEngine.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
+    <ClCompile Include="..\src\Types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Event.h" />

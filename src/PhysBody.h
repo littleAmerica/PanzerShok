@@ -3,19 +3,8 @@
 
 #include "PhysEngine.h"
 
-struct Point
-{
-	int x;
-	int y;
-};
-
-struct Rect
-{
-	int x1;
-	int x2;
-	int y1;
-	int y2;
-};
+#include "Box2D.h"
+#include "Types.h"
 
 class PhysBody
 {
@@ -27,9 +16,15 @@ public:
 	Point getCenter();
 	Rect getBounds();
 
+	void dispose();
+
+	~PhysBody();
 private:
-	
+	An<PhysEngine> m_physEngine;
+
+	b2Body* m_body;
 };
 
+typedef std::shared_ptr<PhysBody> PhysBodyPtr;
 
 #endif

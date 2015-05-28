@@ -14,7 +14,8 @@ PhysEngine& PhysEngine::Instance()
 }
 
 
-PhysEngine::PhysEngine()
+PhysEngine::PhysEngine():
+	m_world(0)
 {
 
 }
@@ -40,4 +41,25 @@ void PhysEngine::init()
 void PhysEngine::clean()
 {
 	delete m_world;
+}
+
+PhysEngine::~PhysEngine()
+{
+
+}
+
+PhysBodyPtr PhysEngine::createBoxPhysBody(const Point& Position, int width, int height)
+{
+	PhysBodyPtr newBody(new PhysBody());
+
+	b2BodyDef bodyDef;
+
+	newBody->m_body = m_world->CreateBody(&bodyDef);
+
+	return newBody;
+}
+
+void PhysEngine::destroyPhysBody(PhysBodyPtr body)
+{
+	m_world->DestroyBody(body->m_body);
 }

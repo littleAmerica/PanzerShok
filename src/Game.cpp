@@ -18,6 +18,8 @@ void Game::run()
 {
 	init();
 
+	m_renderEngine->objects.push_back(new GameObject());
+
 	while(running())
 	{
 		handleEvents();
@@ -81,6 +83,9 @@ void Game::OnExit()
 
 void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 {
-
+	if(sym == SDLK_w)
+	{
+//		m_renderEngine->objects[0]->m_physBody->move(1);	
+	}
 }
 

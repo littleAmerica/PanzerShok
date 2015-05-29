@@ -1,10 +1,14 @@
 #ifndef _RENDER_ENGINE_
 #define _RENDER_ENGINE_
 
+#include <vector>
+
 #include "SDL.h"
 #include <string>
 #include <SDL_image.h>
 #include "Singleton.h"
+
+#include "GameObject.h"
 
 class RenderEngine
 {
@@ -19,11 +23,12 @@ public:
 	void step();
 	void clean();
 
-private:
-
+//private:
 	SDL_Window*		m_pWindow;
 	SDL_Renderer*	m_pRenderer;
 	SDL_Surface*	m_Surface;
+
+	std::vector<GameObject*> objects;
 };
 
 

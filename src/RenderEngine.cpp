@@ -34,7 +34,7 @@ bool RenderEngine::init(const std::string& name, int xpos, int ypos, int height,
 	if (m_pRenderer == NULL)
 		return false;
 
-	SDL_SetRenderDrawColor(m_pRenderer,	255, 0, 255, 255);
+	SDL_SetRenderDrawColor(m_pRenderer,	0, 0, 0, 255);
 
 	//Initialize Image loading
 	int imgFlags = IMG_INIT_PNG;
@@ -51,6 +51,11 @@ bool RenderEngine::init(const std::string& name, int xpos, int ypos, int height,
 void RenderEngine::step()
 {
 	SDL_RenderClear(m_pRenderer);
+
+	for (auto object : objects)
+	{
+		object->render();
+	}
 
 	SDL_RenderPresent(m_pRenderer);
 

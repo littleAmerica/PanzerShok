@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\Event.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\GameObject.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\PhysBody.cpp" />
     <ClCompile Include="..\src\PhysEngine.cpp" />
@@ -26,6 +27,7 @@
   <ItemGroup>
     <ClInclude Include="..\src\Event.h" />
     <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\GameObject.h" />
     <ClInclude Include="..\src\PhysBody.h" />
     <ClInclude Include="..\src\PhysEngine.h" />
     <ClInclude Include="..\src\RenderEngine.h" />
@@ -64,6 +66,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\out\$(Configuration)\</OutDir>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryWPath>$(WindowsSDK_MetadataPath)</LibraryWPath>
+    <SourcePath>$(SourcePath)</SourcePath>
+    <ExcludePath>$(ExcludePath)</ExcludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

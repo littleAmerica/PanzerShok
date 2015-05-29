@@ -2,6 +2,7 @@
 #define _PHYS_ENGINE_
 
 #include <memory>
+#include <vector>
 
 #include "Box2D.h"
 
@@ -23,6 +24,7 @@ public:
 
 	PhysBodyPtr createBoxPhysBody(const Point& Position, int width, int height);
 	void destroyPhysBody(PhysBodyPtr body);
+
 
 private:
 	b2World* m_world;

@@ -1,10 +1,13 @@
 #ifndef _PHYS_BODY_
 #define _PHYS_BODY_
 
-#include "PhysEngine.h"
+#include <memory>
 
 #include "Box2D.h"
 #include "Types.h"
+#include "Singleton.h"
+
+class PhysEngine;
 
 class PhysBody
 {
@@ -14,7 +17,8 @@ public:
 	friend class PhysEngine;
 
 	Point getCenter();
-	Rect getBounds();
+
+	void move(int state);
 
 	void dispose();
 

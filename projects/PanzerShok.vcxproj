@@ -17,6 +17,8 @@
     <ClCompile Include="..\src\Event.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameObject.cpp" />
+    <ClCompile Include="..\src\GameObjectContext.cpp" />
+    <ClCompile Include="..\src\GameObjectLibrary.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\PhysBody.cpp" />
     <ClCompile Include="..\src\PhysEngine.cpp" />
@@ -28,10 +30,13 @@
     <ClInclude Include="..\src\Event.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameObject.h" />
+    <ClInclude Include="..\src\GameObjectContext.h" />
+    <ClInclude Include="..\src\GameObjectLibrary.h" />
     <ClInclude Include="..\src\PhysBody.h" />
     <ClInclude Include="..\src\PhysEngine.h" />
     <ClInclude Include="..\src\RenderEngine.h" />
     <ClInclude Include="..\src\Singleton.h" />
+    <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -48,25 +48,30 @@ PhysEngine::~PhysEngine()
 
 }
 
-PhysBodyPtr PhysEngine::createBoxPhysBody(const Point& position, int width, int height)
+b2World* PhysEngine::world()
 {
-	PhysBodyPtr newBody(new PhysBody());
-
-	b2BodyDef bodyDef;
-	bodyDef.position = b2Vec2(position.x, position.y);
-	bodyDef.type = b2_dynamicBody;
-
-	newBody->m_body = m_world->CreateBody(&bodyDef);
-
-	b2PolygonShape shape;
-	shape.SetAsBox(width,height);
-
-	newBody->m_body->CreateFixture(&shape, 0.0f);
-
-	return newBody;
+	return m_world;
 }
 
-void PhysEngine::destroyPhysBody(PhysBodyPtr body)
-{
-	m_world->DestroyBody(body->m_body);
-}
+//PhysBodyPtr PhysEngine::createBoxPhysBody(const Point& position, int width, int height)
+//{
+//	PhysBodyPtr newBody(new PhysBody());
+//
+//	b2BodyDef bodyDef;
+//	bodyDef.position = b2Vec2(position.x, position.y);
+//	bodyDef.type = b2_dynamicBody;
+//
+//	newBody->m_body = m_world->CreateBody(&bodyDef);
+//
+//	b2PolygonShape shape;
+//	shape.SetAsBox(width,height);
+//
+//	newBody->m_body->CreateFixture(&shape, 0.0f);
+//
+//	return newBody;
+//}
+//
+//void PhysEngine::destroyPhysBody(PhysBodyPtr body)
+//{
+//	m_world->DestroyBody(body->m_body);
+//}

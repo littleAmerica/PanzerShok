@@ -22,9 +22,10 @@ public:
 	void step(float timeStep);
 	void clean();
 
-	PhysBodyPtr createBoxPhysBody(const Point& Position, int width, int height);
-	void destroyPhysBody(PhysBodyPtr body);
+	//PhysBodyPtr createBoxPhysBody(const Point& Position, int width, int height);
+	//void destroyPhysBody(PhysBodyPtr body);
 
+	b2World* world();
 
 private:
 	b2World* m_world;

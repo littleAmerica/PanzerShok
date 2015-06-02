@@ -5,9 +5,11 @@
 
 #include "Texture.h"
 #include "Event.h"
+#include "Singleton.h"
 
-#include "RenderEngine.h"
-#include "PhysEngine.h"
+class PhysEngine;
+class RenderEngine;
+class GameObjectLibrary;
 
 class Game : private Event
 {
@@ -28,12 +30,13 @@ private:
 
 	virtual void OnExit();
 	virtual void OnKeyDown(SDL_Keycode sym, Uint16 mod);
-
+	virtual void OnKeyUp(SDL_Keycode sym, Uint16 mod);
+	
 	bool			m_running;
 
 	An<PhysEngine>	m_physEngine;
 	An<RenderEngine> m_renderEngine;
-
+	An<GameObjectLibrary> m_gameObjectLibrary;
 
 	std::string		m_name;
 	int				m_xpos;

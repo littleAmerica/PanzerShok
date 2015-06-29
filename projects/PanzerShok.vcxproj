@@ -14,30 +14,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Event.cpp" />
+    <ClCompile Include="..\src\Camera.cpp" />
+    <ClCompile Include="..\src\EventListener.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameObject.cpp" />
-    <ClCompile Include="..\src\GameObjectContext.cpp" />
-    <ClCompile Include="..\src\GameObjectLibrary.cpp" />
+    <ClCompile Include="..\src\GameObjectList.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\PhysBody.cpp" />
     <ClCompile Include="..\src\PhysEngine.cpp" />
+    <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\RenderEngine.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
-    <ClCompile Include="..\src\Types.h" />
+    <ClCompile Include="..\src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Event.h" />
+    <ClInclude Include="..\src\Camera.h" />
+    <ClInclude Include="..\src\EventListener.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameObject.h" />
-    <ClInclude Include="..\src\GameObjectContext.h" />
-    <ClInclude Include="..\src\GameObjectLibrary.h" />
-    <ClInclude Include="..\src\PhysBody.h" />
+    <ClInclude Include="..\src\GameObjectList.h" />
     <ClInclude Include="..\src\PhysEngine.h" />
+    <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\RenderEngine.h" />
     <ClInclude Include="..\src\Singleton.h" />
     <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\Texture.h" />
+    <ClInclude Include="..\src\Timer.h" />
+    <ClInclude Include="..\src\Types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5F4EDDEA-1FFA-4682-8C36-275ED3986E64}</ProjectGuid>
@@ -91,14 +93,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\external\SDL2-2.0.3\include;$(ProjectDir)..\external\SDL2_image-2.0.0\include;$(ProjectDir)..\external\Box2D_v2.3.0\include\;$(ProjectDir)..\external\Box2D_v2.3.0\include\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\external\SDL2-2.0.3\include;$(ProjectDir)..\external\SDL2_image-2.0.0\include;$(ProjectDir)..\external\Box2D_v2.3.0\include\;$(ProjectDir)..\external\Box2D_v2.3.0\include\Common;$(ProjectDir)..\external\SDL2_gfx-1.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\external\SDL2-2.0.3\lib\x86;$(ProjectDir)..\external\SDL2_image-2.0.0\lib\x86;$(ProjectDir)..\external\Box2D_v2.3.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\external\SDL2-2.0.3\lib\x86;$(ProjectDir)..\external\SDL2_image-2.0.0\lib\x86;$(ProjectDir)..\external\Box2D_v2.3.0\lib\x86;$(ProjectDir)..\external\SDL2_gfx-1.0.1\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;Box2D.lib;SDL2_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>
@@ -107,7 +109,8 @@
     <PostBuildEvent>
       <Command>xcopy /y /d /r  "$(ProjectDir)..\external\SDL2-2.0.3\lib\x86\*.dll" "$(OutDir)"
 xcopy /y /d /r  "$(ProjectDir)..\external\SDL2_image-2.0.0\lib\x86\*.dll" "$(OutDir)"
-xcopy /y /d /r  "$(ProjectDir)..\external\Box2D_v2.3.0\lib\x86\*.dll" "$(OutDir)"</Command>
+xcopy /y /d /r  "$(ProjectDir)..\external\Box2D_v2.3.0\lib\x86\*.dll" "$(OutDir)"
+xcopy /y /d /r  "$(ProjectDir)..\external\SDL2_gfx-1.0.1\lib\x86\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

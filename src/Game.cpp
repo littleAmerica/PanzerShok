@@ -4,15 +4,13 @@
 #include <iostream>
 
 #include "RenderEngine.h"
+#include "Player.h"
 #include "PhysEngine.h"
 #include "GameObjectLibrary.h"
 
-#include "GameObjectContext.h"
 #include "GameObject.h"
 #include "States.h"
-
-static GameObjectContext* player;
-static int state = 0;
+#include "Timer.h"
 
 
 Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
@@ -21,21 +19,34 @@ Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
 	m_xpos(xpos),
 	m_ypos(ypos),
 	m_width(width),
-	m_height(height)
+	m_height(height),
+	m_camera()
 {
+
 }
+
+static const int FRAMES_PER_SECOND = 40;
 
 void Game::run()
 {
 	init();
 
+	Timer timer;
+
 	while(running())
 	{
+		timer.start();
+
 		handleEvents();
 
 		update();
 
 		render();
+
+		int ticks = timer.ticks();
+
+		if(ticks < 1000 / FRAMES_PER_SECOND)
+			timer.wait(( 1000 / FRAMES_PER_SECOND ) - ticks);
 	}
 
 	clean();
@@ -44,22 +55,34 @@ void Game::run()
 void Game::init()
 {
 	m_physEngine->init();
-	m_renderEngine->init(m_name, m_xpos, m_ypos, m_width, m_height);
-	m_gameObjectLibrary->registerGameObject();
+	m_renderEngine->init(this);
+	//m_gameObjectLibrary->registerGameObject();
 					
 	m_running = true;
 					
-	player = new GameObjectContext(m_gameObjectLibrary->find("the only"), Point(100, 100));
+	Player* player = new Player();
+	m_eventListeners.push_back(player);
+	m_gameObjectList.addGameObject(player);
+
+	m_camera.reset(new Camera(m_width, m_height));
+	m_eventListeners.push_back(this);
 }
 
 void Game::render()
 {
-	m_renderEngine->step(player);	
+	//TODO
+	//this is temporary
+	m_renderEngine->step(m_gameObjectList);	
 }
 
 void Game::update()
 {
 	m_physEngine->step(1.f/60);
+
+	for(size_t i = 0; i < m_gameObjectList.GetSize(); ++i)
+	{
+		m_gameObjectList.getNthGameObject(i)->update(0.f); 
+	}
 }
 
 void Game::handleEvents()
@@ -67,12 +90,9 @@ void Game::handleEvents()
 	SDL_Event event;
 	while(SDL_PollEvent(&event))
 	{
-		OnEvent(&event);
+		for(EventListener* eventListener : m_eventListeners)
+			eventListener->OnEvent(&event);
 	}
-	
-	player->getGameObject()->updateFriction(player);
-	player->getGameObject()->updateDrive(player, state);
-	player->getGameObject()->updateTurn(player, state);
 }
 
 void Game::clean()
@@ -92,51 +112,53 @@ void Game::OnExit()
 	m_running = false;
 }
 
+void Game::OnLButtonDown(int mX, int mY)
+{
+	GameObject* gameObject = new GameObject(mX, mY);
+	m_gameObjectList.addGameObject(gameObject);
+}
+
+CameraPtr Game::camera()
+{
+	return m_camera;
+}
+
+std::string Game::gameName()
+{
+	return m_name;
+}
+
+int Game::windowWidth()
+{
+	return m_width;
+}
+
+int Game::windowHeight()
+{
+	return m_height;
+}
+
+int Game::windowXpos()
+{
+	return m_xpos;
+}
+
+int Game::windowYpos()
+{
+	return m_ypos;
+}
 
 void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 {
-	switch (sym)
+	if(sym == SDLK_q)
 	{
-	case SDLK_w: state |= UP; break;
-	case SDLK_s: state |= DOWN; break;
-	case SDLK_a: state |= LEFT; break;
-	case SDLK_d: state |= RIGHT; break;
-	default:
-		break;
+		if(m_camera)
+			m_camera->setCameraFactor(m_camera->zoomFactorX() * 1.05, m_camera->zoomFactorY() * 1.05);
+	}
+	else if(sym == SDLK_e)
+	{
+		if(m_camera)
+			m_camera->setCameraFactor(m_camera->zoomFactorX() / 1.05, m_camera->zoomFactorY() / 1.05);
 	}
 
 }
-
-void Game::OnKeyUp(SDL_Keycode sym, Uint16 mod)
-{
-	switch (sym)
-	{
-	case SDLK_w: state &= ~UP; break;
-	case SDLK_s: state &= ~DOWN; break;
-	case SDLK_a: state &= ~LEFT; break;
-	case SDLK_d: state &= ~RIGHT; break;
-	default:
-		break;
-	}
-}
-
-//
-//void Keyboard(unsigned char key)
-//{
-//	switch (key) {
-//	case 'a' : m_controlState |= TDC_LEFT; break;
-//	case 'd' : m_controlState |= TDC_RIGHT; break;
-//	case 'w' : m_controlState |= TDC_UP; break;
-//	case 's' : m_controlState |= TDC_DOWN; break;
-//	}
-//}
-//
-//void KeyboardUp(unsigned char key)
-//{
-//	switch (key) {
-//	case 'a' : m_controlState &= ~TDC_LEFT; break;
-//	case 'd' : m_controlState &= ~TDC_RIGHT; break;
-//	case 'w' : m_controlState &= ~TDC_UP; break;
-//	case 's' : m_controlState &= ~TDC_DOWN; break;
-//	}
-//}

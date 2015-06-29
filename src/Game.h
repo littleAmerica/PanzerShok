@@ -2,21 +2,34 @@
 #define _GAME_H_
 
 #include <string>
+#include <vector>
 
 #include "Texture.h"
-#include "Event.h"
+#include "EventListener.h"
 #include "Singleton.h"
+#include "GameObjectList.h"
+#include "Camera.h"
 
 class PhysEngine;
 class RenderEngine;
 class GameObjectLibrary;
 
-class Game : private Event
+class Game : 
+	public EventListener
 {
 public:
 	Game(const std::string& name, int xpos, int ypos, int height, int width);
 
 	void run();
+
+	CameraPtr	camera();
+	std::string	gameName();
+	//we can consider getting rid of windows setting in Game class
+	//maybe we should add window class to encapsulate this concepts (if needed)
+	int			windowWidth();
+	int			windowHeight();
+	int			windowXpos();
+	int			windowYpos();
 
 private:
 	//Game routine
@@ -27,16 +40,23 @@ private:
 	void clean();
 	bool running();
 
-
+	//EventListener function
 	virtual void OnExit();
+	virtual void OnLButtonDown(int mX, int mY);
 	virtual void OnKeyDown(SDL_Keycode sym, Uint16 mod);
-	virtual void OnKeyUp(SDL_Keycode sym, Uint16 mod);
+
 	
 	bool			m_running;
 
 	An<PhysEngine>	m_physEngine;
 	An<RenderEngine> m_renderEngine;
-	An<GameObjectLibrary> m_gameObjectLibrary;
+	//An<GameObjectLibrary> m_gameObjectLibrary;
+
+	//should we make own singleton class for listeners?
+	std::vector<EventListener*> m_eventListeners;
+	GameObjectList m_gameObjectList;
+
+	CameraPtr			m_camera;
 
 	std::string		m_name;
 	int				m_xpos;
@@ -44,7 +64,6 @@ private:
 	int				m_width;
 	int				m_height;
 
-	Texture		text;
 };
 
 #endif

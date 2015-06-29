@@ -7,34 +7,41 @@
 //TODO //remove it from header
 #include "Box2D.h"
 
-class GameObjectContext;
+#include "States.h"
+#include "Types.h"
 
-class GameObject
-{	
+#include <iostream>
+
+#include "PhysEngine.h"
+
+
+class GameObject {
 public:
-	GameObject();	
+	GameObject(int x = 100, int y = 100);
+	virtual ~GameObject();
 
-	void move();
-	float width()  { return m_width; }
-	float weight() const { return m_weight; }
-	float height() const { return m_height; }
+	//need to figure out what exactly the update wants to get (int?)
+	//the update by default applies friction slow mechanism
+	virtual void update(float deltaTime); 
 
-	~GameObject();
-	b2Vec2 getLateralVelocity(GameObjectContext* context);
-	b2Vec2 getForwardVelocity(GameObjectContext* context);
-	void updateFriction(GameObjectContext* context);
-	void updateDrive(GameObjectContext* context, int controlState);
-	void updateTurn(GameObjectContext* context, int controlState);
-public:
-	std::string name;
+	b2Vec2	center();
+	float	angle();
+	Rect_t	rect();
 
+protected:
+	virtual void	updateFriction();
+
+	virtual b2Vec2	lateralVelocity();
+	virtual b2Vec2	forwardVelocity();
+
+	b2Body* m_body;
 	float m_maxForwardSpeed;
 	float m_maxBackwardSpeed;
 	float m_maxDriveForce;
 	
-	float m_weight;
-	float m_width;
-	float m_height;
+	Rect_t m_rect;
+
+	An<PhysEngine>	m_physEngine;
 };
 
 #endif

@@ -1,12 +1,15 @@
+#ifndef _EVENT_LISTENER_
+#define _EVENT_LISTENER_
+
 #include "SDL.h"
 
-class Event {
+class EventListener {
 public:
-	Event();
+	EventListener();
 
-	virtual ~Event();
+	virtual ~EventListener();
 
-	virtual void OnEvent(SDL_Event* event);
+	void OnEvent(SDL_Event* event);
 
 	virtual void OnInputFocus();
 
@@ -58,3 +61,5 @@ public:
 
 	virtual void OnUser(Uint8 type, int code, void* data1, void* data2);
 };
+
+#endif //_EVENT_LISTENER_

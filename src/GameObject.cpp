@@ -3,102 +3,94 @@
 #include "PhysEngine.h"
 #include "RenderEngine.h"
 
-#include "GameObjectContext.h"
-
 #include "States.h"
 #include "SDL.h"
 
-static float maxForwardSpeed = 10;
-static float maxBackwardSpeed = -20;
-static float maxDriveForce = 10;
 
-GameObject::GameObject()
+
+
+GameObject::GameObject(int x /*= 0*/, int y /* = 0*/)
 {
-	m_maxForwardSpeed = maxForwardSpeed;
-	m_maxBackwardSpeed = maxBackwardSpeed;
-	m_maxDriveForce = maxDriveForce;
+	m_maxForwardSpeed = 100;
+	m_maxBackwardSpeed = -10;
+	m_maxDriveForce = 150000;
+	m_rect = Rect_t(0, 16, 0, 16);
 
-	m_weight = 20;
 
-	m_width = 32;
-	m_height = 32;
+
+	b2BodyDef bodyDef;
+	bodyDef.position = b2Vec2(x, y);
+	bodyDef.type = b2_dynamicBody;
+	m_body = m_physEngine->world()->CreateBody(&bodyDef);
+
+	b2PolygonShape polygonShape;
+	polygonShape.SetAsBox( m_rect.x2 / 2, m_rect.y2 / 2);
+	m_body->CreateFixture(&polygonShape, 1);//shape density
+}
+
+
+
+b2Vec2 GameObject::lateralVelocity()
+{
+	b2Vec2 currentRightNormal = m_body->GetWorldVector( b2Vec2(1,0) );
+	return b2Dot( currentRightNormal, m_body->GetLinearVelocity() ) * currentRightNormal;
+}
+
+b2Vec2 GameObject::forwardVelocity()
+{
+	b2Vec2 currentForwardNormal = m_body->GetWorldVector( b2Vec2(0,1) );
+	return b2Dot( currentForwardNormal, m_body->GetLinearVelocity() ) * currentForwardNormal;
+}
+
+
+
+void GameObject::updateFriction()
+{
+	//lateral linear velocity
+	float maxLateralImpulse = 25.f;
+	b2Vec2 impulse = m_body->GetMass() * -lateralVelocity();
+	if ( impulse.Length() > maxLateralImpulse )
+		impulse *= maxLateralImpulse / impulse.Length();
+	m_body->ApplyLinearImpulse( impulse, m_body->GetWorldCenter(), true);
+
+	//angular velocity
+	m_body->ApplyAngularImpulse( 0.1f * m_body->GetInertia() * -m_body->GetAngularVelocity(), true);
+
+	//forward linear velocity
+
+	//std::cout << "forward velocity: x = " << currentForwardNormal.x << " y = " << currentForwardNormal.y << "\n";
+
+	//forward linear velocity
+	b2Vec2 currentForwardNormal = forwardVelocity();
+	float currentForwardSpeed = currentForwardNormal.Normalize();
+	float dragForceMagnitude = -2 * currentForwardSpeed;
+	m_body->ApplyForce( dragForceMagnitude * currentForwardNormal, m_body->GetWorldCenter(), true );
+
+	std::cout << m_body->GetWorldCenter().x << " " << m_body->GetWorldCenter().y << "\n";
+}
+
+b2Vec2 GameObject::center()
+{
+	b2Vec2 center = m_body->GetWorldCenter();
+	return center;
+}
+
+float GameObject::angle()
+{
+	return m_body->GetAngle();
+}
+
+Rect_t GameObject::rect()
+{
+	return m_rect;
 }
 
 GameObject::~GameObject()
-{	
-}
-
-
-
-
-b2Vec2 GameObject::getLateralVelocity(GameObjectContext* context)
 {
-	b2Vec2 currentRightNormal = context->body()->GetWorldVector( b2Vec2(1,0) );
-	return b2Dot( currentRightNormal, context->body()->GetLinearVelocity() ) * currentRightNormal;
+
 }
 
-b2Vec2 GameObject::getForwardVelocity(GameObjectContext* context)
+void GameObject::update(float deltaTime)
 {
-	b2Vec2 currentForwardNormal = context->body()->GetWorldVector( b2Vec2(0,1) );
-	return b2Dot( currentForwardNormal, context->body()->GetLinearVelocity() ) * currentForwardNormal;
+	updateFriction();	
 }
-
-void GameObject::updateFriction(GameObjectContext* context)
-{
-	//lateral linear velocity
-	float maxLateralImpulse = 2.5f;
-	b2Vec2 impulse = context->body()->GetMass() * -getLateralVelocity(context);
-	if ( impulse.Length() > maxLateralImpulse )
-		impulse *= maxLateralImpulse / impulse.Length();
-	context->body()->ApplyLinearImpulse( impulse, context->body()->GetWorldCenter(), true );
-
-	//angular velocity
-	context->body()->ApplyAngularImpulse( 0.1f * context->body()->GetInertia() * - context->body()->GetAngularVelocity(), true );
-
-	//forward linear velocity
-	b2Vec2 currentForwardNormal = getForwardVelocity(context);
-	float currentForwardSpeed = currentForwardNormal.Normalize();
-	float dragForceMagnitude = -2 * currentForwardSpeed;
-	context->body()->ApplyForce( dragForceMagnitude * currentForwardNormal, context->body()->GetWorldCenter(), true );
-}
-
-void GameObject::updateDrive(GameObjectContext* context, int controlState) {
-
-	//find desired speed
-	float desiredSpeed = 0;
-	switch ( controlState & (UP|DOWN) ) {
-	case UP:   desiredSpeed = m_maxForwardSpeed;  break;
-	case DOWN: desiredSpeed = m_maxBackwardSpeed; break;
-	default: return;//do nothing
-	}
-
-	//find current speed in forward direction
-	b2Vec2 currentForwardNormal = context->body()->GetWorldVector( b2Vec2(0,1) );
-	float currentSpeed = b2Dot( getForwardVelocity(context), currentForwardNormal );
-
-	//apply necessary force
-	float force = 0;
-	if ( desiredSpeed > currentSpeed )
-		force = m_maxDriveForce;
-	else if ( desiredSpeed < currentSpeed )
-		force = -m_maxDriveForce;
-	else
-		return;
-	context->body()->ApplyForce( force * currentForwardNormal, context->body()->GetWorldCenter(), true );
-}
-
-void GameObject::updateTurn(GameObjectContext* context, int controlState) {
-	float desiredTorque = 0;
-	switch ( controlState & (LEFT|RIGHT) ) 
-	{
-		case LEFT:  
-			desiredTorque = 15;  
-			break;
-		case RIGHT: 
-			desiredTorque = -15; 
-			break;
-	default: ;//nothing
-	}
-	context->body()->ApplyTorque( desiredTorque , true);
-}
-

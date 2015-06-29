@@ -1,33 +1,42 @@
 #ifndef _TEXTURE_
 #define _TEXTURE_
 
+#include <string>
+#include <memory>
+
 #include "SDL.h"
 #include "SDL_image.h"
-#include <string>
+
+
+class Texture;
+
+typedef std::shared_ptr<Texture> TexturePtr;
+typedef SDL_Texture* TextureHandle; 
 
 class Texture
 {
 public:
 	Texture();
+	Texture(TextureHandle texture, int w = 0, int h = 0);
 
-	void SetRenderer(SDL_Renderer* renderer){m_renderer = renderer;}
+	void	SetRenderer(SDL_Renderer* renderer);
+	void	loadImage(const std::string& path);
 
-	void loadImage(const std::string& path);
-
-	void render( int x, int y);
+	//void render( int x, int y);
 	
-	int getWidth(){return m_width;}
-	int getHeight(){return m_height;}
+	//std::shared_ptr<Texture>	scaleTexture(int new_width, int new_heigh);
+	SDL_Rect	rect(); 
+	TextureHandle textureHandle();
+
+	int width() const;
+	int height() const;
 
 private:
 	//The actual hardware texture
-	SDL_Texture* m_texture;
+	TextureHandle m_texture;
 
 	SDL_Renderer* m_renderer;
-
-	//Image dimensions
-	int m_width;
-	int m_height;
+	SDL_Rect m_rect;
 };
 
 SDL_Surface* loadSurface( const std::string& path, SDL_PixelFormat* format = NULL);

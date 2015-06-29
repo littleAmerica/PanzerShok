@@ -8,7 +8,10 @@
 #include <SDL_image.h>
 #include "Singleton.h"
 
-#include "GameObjectContext.h"
+#include "GameObject.h"
+
+class GameObjectList;
+class Game;
 
 class RenderEngine
 {
@@ -19,11 +22,16 @@ private:
 public:
 	static RenderEngine& Instance();
 	
-	bool init(const std::string& name, int xpos, int ypos, int height, int width);
-	void step(GameObjectContext* object);
+	bool init(Game* game);
+	void step(const GameObjectList& objects);
 	void clean();
 
-//private:
+	SDL_Renderer* renderer();
+
+	//SDL_Surface* RenderEngine::rotate(SDL_Surface* source, double angle, double zoom, int smooth);
+
+private:
+	Game*	m_game;
 	SDL_Window*		m_pWindow;
 	SDL_Renderer*	m_pRenderer;
 	SDL_Surface*	m_Surface;

@@ -5,9 +5,9 @@
 #include <vector>
 
 #include "Box2D.h"
-#include "Game.h"
+#include "../Game.h"
 
-#include "Singleton.h"
+#include "../Singleton.h"
 
 class PhysEngine
 {

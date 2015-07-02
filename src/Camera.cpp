@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-SDL_Rect Camera::apply(SDL_Rect rect)
+SDL_Rect Camera::world2camera(SDL_Rect rect)
 {
 	SDL_Rect out = rect;
 	
@@ -15,6 +15,13 @@ SDL_Rect Camera::apply(SDL_Rect rect)
 	return out;
 }
 
+Point_t Camera::world2camera(Point_t point)
+{
+	point.x *= zoomFactorX();
+	point.y *= zoomFactorY();
+	return point;
+}
+
 void Camera::setCameraRect(SDL_Rect rect)
 {
 	throw 3;
@@ -27,6 +34,9 @@ void Camera::setCameraCenter(SDL_Point point)
 
 void Camera::setCameraFactor(float x, float y)
 {
+	if(x == 0 || y == 0)
+		throw;
+
 	m_zoomFactorX = x;
 	m_zoomFactorY = y;
 }
@@ -56,5 +66,27 @@ float Camera::zoomFactorX()
 float Camera::zoomFactorY()
 {
 	return m_zoomFactorY;
+}
+
+SDL_Rect Camera::camera2world(SDL_Rect rect)
+{
+	SDL_Rect out = rect;
+
+	out.w /= zoomFactorX();
+	out.h /= zoomFactorY();
+	out.x /= zoomFactorX();
+	out.y /= zoomFactorY(); 
+
+	out.x += m_cameraTopLeftCorner.x;
+	out.y += m_cameraTopLeftCorner.y;
+
+	return out;
+}
+
+Point_t Camera::camera2world(Point_t point)
+{
+	point.x /= zoomFactorX();
+	point.y /= zoomFactorY();
+	return point;
 }
 

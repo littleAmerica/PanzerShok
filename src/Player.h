@@ -1,11 +1,11 @@
 #ifndef _Player_H_
 #define _Player_H_
 
-#include "GameObject.h"
+#include "Entity.h"
 #include "EventListener.h"
 
 class Player : 
-	public GameObject,
+	public Entity_Base,
 	public EventListener 
 {
 public:

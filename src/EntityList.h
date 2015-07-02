@@ -2,16 +2,17 @@
 #define __GAME_OBJECT_LIST__
 
 #include <vector>
+#include <memory>
 
-class GameObject;
 
-typedef GameObject* GameObjectPtr;
+class Entity;
+typedef std::shared_ptr<Entity> EntityPtr;
 
-class GameObjectList
+class EntityList
 {
 public:
-	void addGameObject(GameObjectPtr gameObject);
-	GameObjectPtr getNthGameObject(size_t index) const;
+	void addGameObject(EntityPtr gameObject);
+	EntityPtr getNthGameObject(size_t index) const;
 	size_t GetSize() const;
 
 
@@ -20,7 +21,7 @@ private:
 	//TODO add shared_ptr 
 	//We can consider rewriting this in case 
 	//we need some sort of order in rendering the game object
-	std::vector<GameObjectPtr> m_gameObjectList;
+	std::vector<EntityPtr> m_gameObjectList;
 };
 
 #endif

@@ -10,7 +10,11 @@ class Camera
 {
 public:
 	Camera(int screenWidth, int screenHeight);
-	SDL_Rect apply(SDL_Rect rect);
+	SDL_Rect world2camera(SDL_Rect rect);
+	Point_t world2camera(Point_t point);
+
+	SDL_Rect camera2world(SDL_Rect rect);
+	Point_t camera2world(Point_t point);
 
 	void setCameraRect(SDL_Rect rect);
 	void setCameraCenter(SDL_Point point);

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\Camera.cpp" />
+    <ClCompile Include="..\src\EventListener.cpp" />
+    <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Player.cpp" />
+    <ClCompile Include="..\src\RenderEngine.cpp" />
+    <ClCompile Include="..\src\Texture.cpp" />
+    <ClCompile Include="..\src\Timer.cpp" />
+    <ClCompile Include="..\src\Physics\PhysEngine.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EntityList.cpp" />
+    <ClCompile Include="..\src\Entity.cpp" />
+    <ClCompile Include="..\src\Physics\Physics_Rigid.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Camera.h" />
+    <ClInclude Include="..\src\EventListener.h" />
+    <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\Player.h" />
+    <ClInclude Include="..\src\RenderEngine.h" />
+    <ClInclude Include="..\src\Singleton.h" />
+    <ClInclude Include="..\src\States.h" />
+    <ClInclude Include="..\src\Texture.h" />
+    <ClInclude Include="..\src\Timer.h" />
+    <ClInclude Include="..\src\Types.h" />
+    <ClInclude Include="..\src\Physics\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Physics\PhysEngine.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EntityList.h" />
+    <ClInclude Include="..\src\Entity.h" />
+    <ClInclude Include="..\src\Physics\Physics_Rigid.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{32a249a4-e491-4464-83a3-418c86176043}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

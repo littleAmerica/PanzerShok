@@ -1,12 +1,12 @@
 #include "RenderEngine.h"
 #include "SDL2_rotozoom.h"
-#include "GameObjectList.h"
+#include "EntityList.h"
 #include "Game.h"
 
 #include <math.h>
 
-double Radian2Degree(double degree);
-SDL_Rect Rect2SDL_Rect(Rect_t rect);
+static double Radian2Degree(double degree);
+static  SDL_Rect Rect2SDL_Rect(Rect_t rect);
 
 
 
@@ -89,43 +89,13 @@ bool RenderEngine::init(Game* game)
 #include "Texture.h"
 #include "Camera.h"
 
-void RenderEngine::step(const GameObjectList& objects)
+void RenderEngine::step(const EntityList& objects)
 {
 	SDL_RenderClear(m_pRenderer);
 
-	//SDL_ScaleSurface(SDL_Surface* Surface, Uint16 Width, Uint16 Height);
-
-	Texture text_;
-	text_.SetRenderer(m_pRenderer);
-	text_.loadImage("E:\\Projects\\PanzerShok\\resource\\tank1.png");
-
-	CameraPtr camera = m_game ? m_game->camera() : NULL;
-
 	for(size_t i = 0; i < objects.GetSize(); ++i)
 	{
-		GameObject* object = objects.getNthGameObject(i); 
-		
-		Rect_t size = object->rect();
-		SDL_Rect origin = Rect2SDL_Rect(size);
-		
-		b2Vec2 center = object->center();
-		SDL_Rect dest = {center.x - size.x1, center.y - size.x2, size.x2, size.y2};
-
-
-		SDL_Surface *s = SDL_CreateRGBSurface(0, size.x2, size.y2, 32, 0, 0, 0, 0);
-		SDL_FillRect(s, NULL, SDL_MapRGB(s->format, 255, 0, 0));
-
-		SDL_Texture* text = SDL_CreateTextureFromSurface(m_pRenderer, s);
-
-		if(camera)
-			dest = camera->apply(dest);
-	
-		SDL_RenderCopyEx(m_pRenderer, text_.textureHandle(), &text_.rect()/*origin*/, &dest, Radian2Degree(object->angle()) + 180, NULL, SDL_FLIP_NONE);
-	
-		SDL_DestroyTexture(text);
-		SDL_FreeSurface(s);
-
-
+		objects.getNthGameObject(i)->draw();
 	}
 	
 	SDL_RenderPresent(m_pRenderer);

@@ -5,10 +5,10 @@
 
 #include "RenderEngine.h"
 #include "Player.h"
-#include "PhysEngine.h"
+#include "Physics/PhysEngine.h"
 #include "GameObjectLibrary.h"
 
-#include "GameObject.h"
+#include "Entity.h"
 #include "States.h"
 #include "Timer.h"
 
@@ -62,7 +62,8 @@ void Game::init()
 					
 	Player* player = new Player();
 	m_eventListeners.push_back(player);
-	m_gameObjectList.addGameObject(player);
+	m_gameObjectList.addGameObject(EntityPtr(player));
+	player = NULL;
 
 	m_camera.reset(new Camera(m_width, m_height));
 	m_eventListeners.push_back(this);
@@ -114,8 +115,10 @@ void Game::OnExit()
 
 void Game::OnLButtonDown(int mX, int mY)
 {
-	GameObject* gameObject = new GameObject(mX, mY);
-	m_gameObjectList.addGameObject(gameObject);
+	Point_t camera(mX, mY);
+	Point_t word = m_camera->camera2world(camera);
+	
+	m_gameObjectList.addGameObject(EntityPtr(new Entity_Base(word.x, word.y)));
 }
 
 CameraPtr Game::camera()

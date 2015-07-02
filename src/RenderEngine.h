@@ -8,9 +8,9 @@
 #include <SDL_image.h>
 #include "Singleton.h"
 
-#include "GameObject.h"
+#include "Entity.h"
 
-class GameObjectList;
+class EntityList;
 class Game;
 
 class RenderEngine
@@ -23,14 +23,14 @@ public:
 	static RenderEngine& Instance();
 	
 	bool init(Game* game);
-	void step(const GameObjectList& objects);
+	void step(const EntityList& objects);
 	void clean();
 
 	SDL_Renderer* renderer();
 
 	//SDL_Surface* RenderEngine::rotate(SDL_Surface* source, double angle, double zoom, int smooth);
 
-private:
+	public:
 	Game*	m_game;
 	SDL_Window*		m_pWindow;
 	SDL_Renderer*	m_pRenderer;

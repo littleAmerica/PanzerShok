@@ -7,7 +7,7 @@
 #include "Texture.h"
 #include "EventListener.h"
 #include "Singleton.h"
-#include "GameObjectList.h"
+#include "EntityList.h"
 #include "Camera.h"
 
 class PhysEngine;
@@ -54,7 +54,7 @@ private:
 
 	//should we make own singleton class for listeners?
 	std::vector<EventListener*> m_eventListeners;
-	GameObjectList m_gameObjectList;
+	EntityList m_gameObjectList;
 
 	CameraPtr			m_camera;
 

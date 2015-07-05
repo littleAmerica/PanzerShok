@@ -5,6 +5,8 @@
 #include <memory>
 #include "Physics/Physics_Rigid.h"
 
+class Camera;
+class Screen;
 
 class Entity;
 typedef std::shared_ptr<Entity> EntityPtr;
@@ -17,8 +19,14 @@ public:
 
 	//need to figure out what exactly the update wants to get (int?)
 	virtual void update(float deltaTime) = 0; 
-	virtual void draw() = 0;
+	virtual void draw(Screen* pScreen, Camera* pCamera = NULL) = 0;
+	
 	virtual int id() = 0;
+
+	//virtual Rect_t boundsWord() = 0;
+	//virtual	Rect_t	bounds() = 0;
+	//virtual Vec2	center() = 0;
+	//virtual float	angle() = 0;
 };
 
 
@@ -26,17 +34,18 @@ public:
 class Entity_Base: public Entity
 {
 public:
-	Entity_Base(int x = 100, int y = 100);
+	Entity_Base(float x, float y);
 	virtual ~Entity_Base();
 
 	//the update by default applies friction slow mechanism
 	virtual void update(float deltaTime); 
-	virtual void draw();
+	void draw(Screen* pScreen, Camera* pCamera = NULL);
 	
 
-	b2Vec2	center();
+	virtual Vec2	center();
 	float	angle();
-	Rect_t	bounds();
+	virtual Rect_t	bounds();
+	virtual Rect_t boundsWord();
 
 	virtual	int id();
 
@@ -56,31 +65,31 @@ protected:
 };
 
 
-class Entity_Actor: public Entity
-{
-public:
-	Entity_Actor(int x = 100, int y = 100);
-	virtual ~Entity_Actor();
-
-	//the update by default applies friction slow mechanism
-	virtual void update(float deltaTime); 
-	virtual void draw();
-
-
-	b2Vec2	center();
-	float	angle();
-	Rect_t	bounds();
-
-protected:
-	virtual void	updateFriction();
-
-	Physics_Rigid m_body;
-
-	float m_maxForwardSpeed;
-	float m_maxBackwardSpeed;
-	float m_maxDriveForce;
-
-	An<PhysEngine>	m_physEngine;
-};
+//class Entity_Actor: public Entity
+//{
+//public:
+//	Entity_Actor(int x = 100, int y = 100);
+//	virtual ~Entity_Actor();
+//
+//	//the update by default applies friction slow mechanism
+//	virtual void update(float deltaTime); 
+//	virtual void draw();
+//
+//
+//	Vec2	center();
+//	float	angle();
+//	Rect_t	bounds();
+//
+//protected:
+//	virtual void	updateFriction();
+//
+//	Physics_Rigid m_body;
+//
+//	float m_maxForwardSpeed;
+//	float m_maxBackwardSpeed;
+//	float m_maxDriveForce;
+//
+//	An<PhysEngine>	m_physEngine;
+//};
 
 #endif

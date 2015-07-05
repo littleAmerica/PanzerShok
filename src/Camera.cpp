@@ -1,36 +1,45 @@
 #include "Camera.h"
 
-SDL_Rect Camera::world2camera(SDL_Rect rect)
+Camera::Camera(int screenWidth, int screenHeight, const Vec2& center /*= Vec2()*/):
+	m_screenWidth(screenWidth),
+	m_screenHeight(screenHeight),
+	m_topleft(),
+	m_zoomFactorX(1.f),
+	m_zoomFactorY(1.f)
 {
-	SDL_Rect out = rect;
-	
+	m_topleft = center - Vec2(screenWidth / 2, screenHeight / 2);
+}
+
+Rect_t Camera::world2camera(Rect_t rect)
+{
+	Rect_t out = rect;
+
+	Vec2 point = world2camera(Vec2(rect.x, rect.y));
+	out.x = point.x;
+	out.y = point.y;
+
 	out.w *= zoomFactorX();
 	out.h *= zoomFactorY();
-	out.x *= zoomFactorX();
-	out.y *= zoomFactorY(); 
-
-	out.x -= m_cameraTopLeftCorner.x;
-	out.y -= m_cameraTopLeftCorner.y;
 
 	return out;
 }
 
-Point_t Camera::world2camera(Point_t point)
+Vec2 Camera::world2camera(Vec2 point)
 {
 	point.x *= zoomFactorX();
-	point.y *= zoomFactorY();
+	point.y *= zoomFactorY(); 
+
+	point.x -= m_topleft.x;
+	point.y -= m_topleft.y;
+
 	return point;
 }
 
-void Camera::setCameraRect(SDL_Rect rect)
+void Camera::setCameraRect(Rect_t rect)
 {
 	throw 3;
 }
 
-void Camera::setCameraCenter(SDL_Point point)
-{
-	throw 3;
-}
 
 void Camera::setCameraFactor(float x, float y)
 {
@@ -41,19 +50,9 @@ void Camera::setCameraFactor(float x, float y)
 	m_zoomFactorY = y;
 }
 
-Camera::Camera(int screenWidth, int screenHeight):
-	m_screenWidth(screenWidth),
-	m_screenHeight(screenHeight),
-	m_zoomFactorX(1.f),
-	m_zoomFactorY(1.f)
+Vec2 Camera::zoomFactor()
 {
-	m_cameraTopLeftCorner.x = 0;
-	m_cameraTopLeftCorner.y = 0;
-}
-
-Point_t Camera::zoomFactor()
-{
-	Point_t factor(m_zoomFactorX, m_zoomFactorY);
+	Vec2 factor(m_zoomFactorX, m_zoomFactorY);
 	
 	return factor;
 }
@@ -68,25 +67,33 @@ float Camera::zoomFactorY()
 	return m_zoomFactorY;
 }
 
-SDL_Rect Camera::camera2world(SDL_Rect rect)
+Rect_t Camera::camera2world(Rect_t rect)
 {
-	SDL_Rect out = rect;
+	Rect_t out = rect;
+
+	Vec2 point = camera2world(Vec2(rect.x, rect.y));
+	out.x = point.x;
+	out.y = point.y;
 
 	out.w /= zoomFactorX();
 	out.h /= zoomFactorY();
-	out.x /= zoomFactorX();
-	out.y /= zoomFactorY(); 
-
-	out.x += m_cameraTopLeftCorner.x;
-	out.y += m_cameraTopLeftCorner.y;
 
 	return out;
 }
 
-Point_t Camera::camera2world(Point_t point)
+Vec2 Camera::camera2world(Vec2 point)
 {
+	point.x += m_topleft.x;
+	point.y += m_topleft.y;
+
 	point.x /= zoomFactorX();
 	point.y /= zoomFactorY();
+
 	return point;
+}
+
+void Camera::setCenter(const Vec2& center)
+{
+	m_topleft = center - Vec2(m_screenWidth / 2, m_screenHeight / 2);
 }
 

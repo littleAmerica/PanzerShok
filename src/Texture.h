@@ -25,8 +25,8 @@ public:
 	//void render( int x, int y);
 	
 	//std::shared_ptr<Texture>	scaleTexture(int new_width, int new_heigh);
-	SDL_Rect	rect(); 
-	TextureHandle textureHandle();
+	SDL_Rect	rect() const; 
+	TextureHandle textureHandle() const;
 
 	int width() const;
 	int height() const;

@@ -13,6 +13,8 @@
 class PhysEngine;
 class RenderEngine;
 class GameObjectLibrary;
+class Screen;
+class Player;
 
 class Game : 
 	public EventListener
@@ -56,14 +58,15 @@ private:
 	std::vector<EventListener*> m_eventListeners;
 	EntityList m_gameObjectList;
 
-	CameraPtr			m_camera;
+	CameraPtr			m_pCamera;
+	Screen*				m_pScreen;
+	Player*				player;
 
 	std::string		m_name;
 	int				m_xpos;
 	int				m_ypos;
 	int				m_width;
 	int				m_height;
-
 };
 
 #endif

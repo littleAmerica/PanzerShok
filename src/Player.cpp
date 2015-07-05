@@ -29,8 +29,9 @@ void Player::OnKeyUp(SDL_Keycode sym, Uint16 mod)
 	}
 }
 
-Player::Player()
-	:state(0)
+Player::Player(float x, float y) :
+	Entity_Base(x, y),
+	state(0)
 {
 	
 }
@@ -63,8 +64,8 @@ void Player::updateDrive()
 	}
 
 	//find current speed in forward direction
-	b2Vec2 currentForwardNormal = m_body->forwardNormal();
-	float currentSpeed = b2Dot( m_body->forwardVelocity(), currentForwardNormal );
+	Vec2 currentForwardNormal = m_body->forwardNormal();
+	float currentSpeed = m_body->currentSpeed();
 
 	//apply necessary force
 	float force = 0;

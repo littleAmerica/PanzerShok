@@ -12,20 +12,22 @@ class Physics_Rigid : public Physics
 public:
 	Physics_Rigid(const PhysicInfo&  physicInfo, int x, int y);
 
-	virtual void	applyForce(const b2Vec2& force);
+	virtual void	applyForce(const Vec2& force);
 	virtual void	applyTorque(float torque);
-	virtual void	applyLinearImpulse(const b2Vec2& impulse);
+	virtual void	applyLinearImpulse(const Vec2& impulse);
 	virtual void	applyAngularImpulse(float impulse);
 
-	virtual b2Vec2	linearVelocity();
-	virtual b2Vec2	lateralVelocity();
-	virtual b2Vec2	forwardVelocity();
+	virtual Vec2 linearVelocity();
+	virtual Vec2 lateralVelocity();
+	virtual Vec2 forwardVelocity();
 	virtual float	angularVelocity(); 
 
-	virtual b2Vec2	forwardNormal();
+	virtual Vec2 forwardNormal();
+
+	virtual float	currentSpeed();
 
 	virtual float	mass();
-	virtual b2Vec2	worldCenter();
+	virtual Vec2	worldCenter();
 	virtual float	inertia();	
 	virtual float	angle();
 	virtual Rect_t	bounds();
@@ -33,6 +35,7 @@ public:
 	virtual void	setEntityID(int id); 
 	virtual int		entityID();
 private:
+
 	b2Body* m_body;
 	const PhysicInfo&  m_physicInfo;
 

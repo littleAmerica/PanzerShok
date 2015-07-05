@@ -71,12 +71,12 @@ int Texture::height() const
 //	return TexturePtr(new Texture(m_texture, new_width, new_heigh));
 //}
 
-TextureHandle Texture::textureHandle()
+TextureHandle Texture::textureHandle() const
 {
 	return m_texture;
 }
 
-SDL_Rect Texture::rect()
+SDL_Rect Texture::rect() const
 {
 	return m_rect;
 }

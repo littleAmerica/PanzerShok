@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Box2D.h"
-#include "../Game.h"
 
 #include "../Singleton.h"
 
@@ -34,9 +33,6 @@ private:
 	b2World* m_world;
 	int32 m_velocityIterations;
 	int32 m_positionIterations;
-
-	Game* m_game;
-
 };
 
 template<> void anFill<PhysEngine>(An<PhysEngine>& renderEngine);

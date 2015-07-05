@@ -13,6 +13,7 @@
 #include "Timer.h"
 
 
+
 Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
 	:m_running(false),
 	m_name(name),
@@ -20,7 +21,7 @@ Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
 	m_ypos(ypos),
 	m_width(width),
 	m_height(height),
-	m_camera()
+	m_pCamera()
 {
 
 }
@@ -56,34 +57,34 @@ void Game::init()
 {
 	m_physEngine->init();
 	m_renderEngine->init(this);
-	//m_gameObjectLibrary->registerGameObject();
-					
+	m_pCamera.reset(new Camera(m_width, m_height));
+	
+	m_pScreen = m_renderEngine->screen();
+
 	m_running = true;
 					
-	Player* player = new Player();
+	player = new Player(100, 100);
 	m_eventListeners.push_back(player);
 	m_gameObjectList.addGameObject(EntityPtr(player));
-	player = NULL;
 
-	m_camera.reset(new Camera(m_width, m_height));
+
 	m_eventListeners.push_back(this);
 }
 
 void Game::render()
 {
-	//TODO
-	//this is temporary
-	m_renderEngine->step(m_gameObjectList);	
+	//m_pCamera->setCenter(player->center());
+
+	m_pScreen->clear();
+	m_gameObjectList.draw(m_pScreen, m_pCamera.get());
+	m_pScreen->swapBuffer();
 }
 
 void Game::update()
 {
 	m_physEngine->step(1.f/60);
 
-	for(size_t i = 0; i < m_gameObjectList.GetSize(); ++i)
-	{
-		m_gameObjectList.getNthGameObject(i)->update(0.f); 
-	}
+	m_gameObjectList.update(0.f); 
 }
 
 void Game::handleEvents()
@@ -115,15 +116,14 @@ void Game::OnExit()
 
 void Game::OnLButtonDown(int mX, int mY)
 {
-	Point_t camera(mX, mY);
-	Point_t word = m_camera->camera2world(camera);
+	Vec2 word = m_pCamera->camera2world(Vec2(mX, mY));
 	
 	m_gameObjectList.addGameObject(EntityPtr(new Entity_Base(word.x, word.y)));
 }
 
 CameraPtr Game::camera()
 {
-	return m_camera;
+	return m_pCamera;
 }
 
 std::string Game::gameName()
@@ -155,13 +155,13 @@ void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 {
 	if(sym == SDLK_q)
 	{
-		if(m_camera)
-			m_camera->setCameraFactor(m_camera->zoomFactorX() * 1.05, m_camera->zoomFactorY() * 1.05);
+		if(m_pCamera)
+			m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() * 1.01f, m_pCamera->zoomFactorY() * 1.01f);
 	}
 	else if(sym == SDLK_e)
 	{
-		if(m_camera)
-			m_camera->setCameraFactor(m_camera->zoomFactorX() / 1.05, m_camera->zoomFactorY() / 1.05);
+		if(m_pCamera)
+			m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() / 1.01f, m_pCamera->zoomFactorY() / 1.01f);
 	}
 
 }

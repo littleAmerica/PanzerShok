@@ -3,12 +3,6 @@
 #include "EntityList.h"
 #include "Game.h"
 
-#include <math.h>
-
-static double Radian2Degree(double degree);
-static  SDL_Rect Rect2SDL_Rect(Rect_t rect);
-
-
 
 template<> void anFill<RenderEngine>(An<RenderEngine>& renderEngine)
 {
@@ -30,7 +24,6 @@ bool RenderEngine::init(Game* game)
 {
 	if(!game)
 		return false;
-	m_game = game;
 
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		return false;
@@ -61,7 +54,37 @@ bool RenderEngine::init(Game* game)
 	//Get window surface
 	m_Surface = SDL_GetWindowSurface( m_pWindow );
 
+	m_screen.init(m_pWindow, m_pRenderer);
+
 	return true;
+}
+
+
+void RenderEngine::step(const EntityList& objects)
+{
+
+}
+
+void RenderEngine::clean()
+{
+	SDL_DestroyWindow(m_pWindow);
+	SDL_DestroyRenderer(m_pRenderer);
+	SDL_Quit();
+}
+
+SDL_Renderer* RenderEngine::renderer()
+{
+	return m_pRenderer;
+}
+
+Screen* RenderEngine::screen()
+{
+	return &m_screen;
+}
+
+double Radian2Degree(double degree)
+{
+	return degree * 180.0 / M_PI;
 }
 
 
@@ -85,43 +108,3 @@ bool RenderEngine::init(Game* game)
 //
 //	return rotatefile;
 //}
-
-#include "Texture.h"
-#include "Camera.h"
-
-void RenderEngine::step(const EntityList& objects)
-{
-	SDL_RenderClear(m_pRenderer);
-
-	for(size_t i = 0; i < objects.GetSize(); ++i)
-	{
-		objects.getNthGameObject(i)->draw();
-	}
-	
-	SDL_RenderPresent(m_pRenderer);
-	SDL_GL_SwapWindow(m_pWindow);
-}
-
-void RenderEngine::clean()
-{
-	SDL_DestroyWindow(m_pWindow);
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_Quit();
-}
-
-SDL_Renderer* RenderEngine::renderer()
-{
-	return m_pRenderer;
-}
-
-double Radian2Degree(double degree)
-{
-	return degree * 180.0 / M_PI;
-}
-
-
-SDL_Rect Rect2SDL_Rect(Rect_t rect)
-{
-	SDL_Rect sdl_rect = {rect.x1, rect.y1, rect.x2 - rect.x1, rect.y2 - rect.y1};
-	return sdl_rect;
-}

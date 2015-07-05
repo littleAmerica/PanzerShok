@@ -9,6 +9,7 @@
 #include "Singleton.h"
 
 #include "Entity.h"
+#include "Screen.h"
 
 class EntityList;
 class Game;
@@ -26,12 +27,13 @@ public:
 	void step(const EntityList& objects);
 	void clean();
 
-	SDL_Renderer* renderer();
+	SDL_Renderer*	renderer();
+	Screen* screen();
+	SDL_Window*	window();
 
-	//SDL_Surface* RenderEngine::rotate(SDL_Surface* source, double angle, double zoom, int smooth);
-
-	public:
-	Game*	m_game;
+private:
+	Screen	m_screen;
+	
 	SDL_Window*		m_pWindow;
 	SDL_Renderer*	m_pRenderer;
 	SDL_Surface*	m_Surface;

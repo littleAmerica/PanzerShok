@@ -24,6 +24,7 @@
     <ClCompile Include="..\src\Physics\Physics_Rigid.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\RenderEngine.cpp" />
+    <ClCompile Include="..\src\Screen.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
     <ClCompile Include="..\src\Timer.cpp" />
   </ItemGroup>
@@ -38,11 +39,12 @@
     <ClInclude Include="..\src\Physics\Physics_Rigid.h" />
     <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\RenderEngine.h" />
+    <ClInclude Include="..\src\Screen.h" />
     <ClInclude Include="..\src\Singleton.h" />
     <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\Texture.h" />
     <ClInclude Include="..\src\Timer.h" />
-    <ClInclude Include="..\src\Types.h" />
+    <ClInclude Include="..\src\Utils\Types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5F4EDDEA-1FFA-4682-8C36-275ED3986E64}</ProjectGuid>

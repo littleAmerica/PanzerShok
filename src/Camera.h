@@ -1,35 +1,40 @@
 #ifndef __CAMERA__
 #define __CAMERA__
 
-#include "SDL.h"
-#include "Types.h"
+#include "Utils/Types.h"
 
 #include <memory>
+
+#include "Entity.h"
 
 class Camera
 {
 public:
-	Camera(int screenWidth, int screenHeight);
-	SDL_Rect world2camera(SDL_Rect rect);
-	Point_t world2camera(Point_t point);
+	Camera(int screenWidth, int screenHeight, const Vec2& center = Vec2(0, 0));
+	
+	void setCenter(const Vec2& center);
 
-	SDL_Rect camera2world(SDL_Rect rect);
-	Point_t camera2world(Point_t point);
+	Rect_t world2camera(Rect_t rect);
+	Vec2 world2camera(Vec2 point);
 
-	void setCameraRect(SDL_Rect rect);
-	void setCameraCenter(SDL_Point point);
+	Rect_t camera2world(Rect_t rect);
+	Vec2 camera2world(Vec2 point);
+
+	void setCameraRect(Rect_t rect);
+	//void setCameraCenter(SDL_Point point);
 	void setCameraFactor(float x, float y);
 
-	Point_t zoomFactor();
+	Vec2 zoomFactor();
 	float zoomFactorX();
 	float zoomFactorY();
 	
 private:
+	EntityPtr	m_entity;
 
 	int			m_screenWidth;
 	int			m_screenHeight;
 
-	SDL_Point	m_cameraTopLeftCorner; // top left camera rect corner in absolute coordinates
+	Vec2		m_topleft;
 
 	float		m_zoomFactorX, m_zoomFactorY; // zoom factor of camera, is equal to screenSize / cameraSize 
 };

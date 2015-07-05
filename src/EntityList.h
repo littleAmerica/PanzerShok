@@ -4,13 +4,20 @@
 #include <vector>
 #include <memory>
 
+#include "Entity.h"
 
-class Entity;
+class Enity;
 typedef std::shared_ptr<Entity> EntityPtr;
 
-class EntityList
+class EntityList : public Entity
 {
 public:
+
+	virtual void update(float deltaTime); 
+	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);
+
+	virtual int id();
+
 	void addGameObject(EntityPtr gameObject);
 	EntityPtr getNthGameObject(size_t index) const;
 	size_t GetSize() const;
@@ -18,7 +25,6 @@ public:
 
 private:
 	//hold all gameObjects
-	//TODO add shared_ptr 
 	//We can consider rewriting this in case 
 	//we need some sort of order in rendering the game object
 	std::vector<EntityPtr> m_gameObjectList;

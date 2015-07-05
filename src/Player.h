@@ -9,7 +9,7 @@ class Player :
 	public EventListener 
 {
 public:
-	Player();
+	Player(float x, float y);
 
 	//GameObject
 	virtual void update(float deltaTime); 

@@ -18,6 +18,7 @@ class Texture
 public:
 	Texture();
 	Texture(TextureHandle texture, int w = 0, int h = 0);
+	~Texture();
 
 	void	SetRenderer(SDL_Renderer* renderer);
 	void	loadImage(const std::string& path);

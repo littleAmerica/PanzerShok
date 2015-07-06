@@ -81,12 +81,14 @@ void Entity_Base::update(float deltaTime)
 	updateFriction();	
 }
 
-
 void Entity_Base::draw(Screen* pScreen, Camera* pCamera /*= NULL*/)
 {
+	//temporary, until we get animator class/texture manager and etc;
 	Texture text_;
 	text_.SetRenderer(RenderEngine::Instance().renderer());
-	text_.loadImage("E:\\Projects\\PanzerShok\\resource\\tank1.png");
+	text_.loadImage(".\\resources\\tank1.png");
+
+
 
 	Rect_t dest = boundsWord();
 

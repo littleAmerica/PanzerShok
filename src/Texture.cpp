@@ -81,6 +81,11 @@ SDL_Rect Texture::rect() const
 	return m_rect;
 }
 
+Texture::~Texture()
+{
+	SDL_DestroyTexture(m_texture);	
+}
+
 
 SDL_Surface* loadSurface( const std::string& path, SDL_PixelFormat* format)
 {

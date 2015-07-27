@@ -6,7 +6,8 @@
 #include "Camera.h"
 #include "Screen.h"
 #include "States.h"
-#include "SDL.h"
+#include "Utils/SDL_platform.h"
+#include "Utils/Resources.h"
 #include "Texture.h"
 
 #include <iostream>
@@ -86,7 +87,7 @@ void Entity_Base::draw(Screen* pScreen, Camera* pCamera /*= NULL*/)
 	//temporary, until we get animator class/texture manager and etc;
 	Texture text_;
 	text_.SetRenderer(RenderEngine::Instance().renderer());
-	text_.loadImage(".\\resources\\tank1.png");
+    text_.loadImage(kResourceFolder + "tank1.png");
 
 
 

@@ -12,16 +12,16 @@
 #include "States.h"
 #include "Timer.h"
 
-
-
 Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
-	:m_running(false),
+    : m_running(false),
+      m_pCamera(),
+      m_pScreen(NULL),
+      player(NULL),
 	m_name(name),
 	m_xpos(xpos),
 	m_ypos(ypos),
 	m_width(width),
-	m_height(height),
-	m_pCamera()
+    m_height(height)
 {
 
 }
@@ -165,3 +165,24 @@ void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 	}
 
 }
+
+//
+//void Keyboard(unsigned char key)
+//{
+//	switch (key) {
+//	case 'a' : m_controlState |= TDC_LEFT; break;
+//	case 'd' : m_controlState |= TDC_RIGHT; break;
+//	case 'w' : m_controlState |= TDC_UP; break;
+//	case 's' : m_controlState |= TDC_DOWN; break;
+//	}
+//}
+//
+//void KeyboardUp(unsigned char key)
+//{
+//	switch (key) {
+//	case 'a' : m_controlState &= ~TDC_LEFT; break;
+//	case 'd' : m_controlState &= ~TDC_RIGHT; break;
+//	case 'w' : m_controlState &= ~TDC_UP; break;
+//	case 's' : m_controlState &= ~TDC_DOWN; break;
+//	}
+//}

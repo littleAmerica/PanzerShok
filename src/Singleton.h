@@ -1,6 +1,8 @@
 #ifndef _SINGLETON_
 #define _SINGLETON_
 
+#include <stdexcept>
+#include <typeinfo>
 
 template<typename T>
 struct An

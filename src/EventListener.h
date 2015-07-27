@@ -1,7 +1,7 @@
 #ifndef _EVENT_LISTENER_
 #define _EVENT_LISTENER_
 
-#include "SDL.h"
+#include "Utils/SDL_platform.h"
 
 class EventListener {
 public:

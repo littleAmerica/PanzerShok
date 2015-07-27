@@ -1,7 +1,7 @@
 #ifndef _PHYSIC_RIGIT_OBJECT_
 #define _PHYSIC_RIGIT_OBJECT_
 
-#include "Box2D.h"
+#include "../Utils/Box2D_platform.h"
 #include "Physics.h"
 
 #include "../Singleton.h"

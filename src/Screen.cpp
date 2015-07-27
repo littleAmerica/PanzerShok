@@ -1,5 +1,5 @@
 #include "Screen.h"
-#include "SDL.h"
+#include "Utils/SDL_platform.h"
 #include "Texture.h"
 
 
@@ -17,7 +17,8 @@ void Screen::renderImage(const Texture& text_, const Rect_t& destination, float 
 	if (!m_pRenderer)
 		throw "Screen isn't initialized";
 	SDL_Rect dest = Rect2SDL_Rect(destination);
-	SDL_RenderCopyEx(m_pRenderer, text_.textureHandle(), &text_.rect()/*origin*/, &dest, Radian2Degree(angle), NULL, SDL_FLIP_NONE);
+    SDL_Rect src = text_.rect();
+    SDL_RenderCopyEx(m_pRenderer, text_.textureHandle(), &src, &dest, Radian2Degree(angle), NULL, SDL_FLIP_NONE);
 }
 
 void Screen::clear()

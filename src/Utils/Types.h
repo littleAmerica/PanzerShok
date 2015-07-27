@@ -1,7 +1,7 @@
 #ifndef __TYPES__
 #define __TYPES__
 
-#include "Box2D.h"
+#include "Box2D_platform.h"
 
 typedef b2Vec2 Vec2;
 
@@ -20,8 +20,8 @@ struct Rect_t
 	Rect_t():
 		x(0.f),
 		y(0.f),
-		h(0.f),
-		w(0.f)
+        w(0.f),
+        h(0.f)
 	{
 	}
 	Rect_t(float _x, float _y, float _w, float _h):

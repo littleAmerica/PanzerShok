@@ -32,6 +32,10 @@
 *.suo
 *.sdf
 
+# QtCreator user settnings
+*.user
+Makefile
+
 
 out
 temp

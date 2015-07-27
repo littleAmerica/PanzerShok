@@ -1,5 +1,4 @@
 #include "GameObjectLibrary.h"
-#include "GameObject.h"
 
 template<> void anFill<GameObjectLibrary>(An<GameObjectLibrary>& renderEngine)
 {
@@ -22,8 +21,8 @@ GameObject* GameObjectLibrary::find(const std::string& name)
 
 void GameObjectLibrary::registerGameObject()
 {
-	GameObject* gameobject = new GameObject();
-	m_library["the only"] = gameobject;
+//	GameObject* gameobject = new GameObject();
+//	m_library["the only"] = gameobject;
 }
 
 GameObjectLibrary::~GameObjectLibrary()

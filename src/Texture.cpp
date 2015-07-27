@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <assert.h>
-#include "SDL2_rotozoom.h"
+//#include "SDL2_rotozoom.h"
 
 void Texture::loadImage(const std::string& path)
 {

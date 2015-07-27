@@ -3,9 +3,9 @@
 
 #include <vector>
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 #include <string>
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include "Singleton.h"
 
 #include "Entity.h"

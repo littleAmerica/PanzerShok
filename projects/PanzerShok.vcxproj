@@ -44,6 +44,8 @@
     <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\Texture.h" />
     <ClInclude Include="..\src\Timer.h" />
+    <ClInclude Include="..\src\Utils\Box2D_platform.h" />
+    <ClInclude Include="..\src\Utils\SDL_platform.h" />
     <ClInclude Include="..\src\Utils\Types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include <Box2D/Box2D.h>
+#include "../Utils/Box2D_platform.h"
 
 #include "../Singleton.h"
 

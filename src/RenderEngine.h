@@ -3,9 +3,8 @@
 
 #include <vector>
 
-#include <SDL2/SDL.h>
+#include "Utils/SDL_platform.h"
 #include <string>
-#include <SDL2/SDL_image.h>
 #include "Singleton.h"
 
 #include "Entity.h"

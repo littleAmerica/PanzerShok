@@ -1,9 +1,8 @@
-#ifndef _PHYSIC_RIGIT_OBJECT_
-#define _PHYSIC_RIGIT_OBJECT_
+#ifndef PHYSICS_RIGID_H_
+#define PHYSICS_RIGID_H_
 
 #include "../Utils/Box2D_platform.h"
 #include "Physics.h"
-
 #include "../Singleton.h"
 #include "PhysEngine.h"
 
@@ -44,4 +43,4 @@ private:
 	An<PhysEngine>	m_physEngine;
 };
 
-#endif // _PHYSIC_RIGIT_OBJECT_
+#endif // PHYSICS_RIGID_H_

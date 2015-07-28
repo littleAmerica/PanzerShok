@@ -1,5 +1,5 @@
-#ifndef _TIMER_
-#define _TIMER_
+#ifndef TIMER_H_
+#define TIMER_H_
 
 class Timer
 {
@@ -15,4 +15,4 @@ private:
 	bool isStarted;
 };
 
-#endif
+#endif // TIMER_H_

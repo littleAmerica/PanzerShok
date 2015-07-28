@@ -1,8 +1,8 @@
-#ifndef _GAME_OBJECT_
-#define _GAME_OBJECT_
-
+#ifndef ENTITY_H_
+#define ENTITY_H_
 
 #include <memory>
+
 #include "Physics/Physics_Rigid.h"
 
 class Camera;
@@ -92,4 +92,4 @@ protected:
 //	An<PhysEngine>	m_physEngine;
 //};
 
-#endif
+#endif // ENTITY_H_

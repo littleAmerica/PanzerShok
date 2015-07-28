@@ -12,7 +12,7 @@
 #include "States.h"
 #include "Timer.h"
 
-Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
+Game::Game(const std::string& name, int xpos, int ypos, int width, int height)
     : m_running(false),
       m_pCamera(),
       m_pScreen(NULL),
@@ -73,7 +73,7 @@ void Game::init()
 
 void Game::render()
 {
-	//m_pCamera->setCenter(player->center());
+    m_pCamera->setCenter(player->center());
 
 	m_pScreen->clear();
 	m_gameObjectList.draw(m_pScreen, m_pCamera.get());
@@ -156,12 +156,12 @@ void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 	if(sym == SDLK_q)
 	{
 		if(m_pCamera)
-			m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() * 1.01f, m_pCamera->zoomFactorY() * 1.01f);
+            m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() * 1.1f, m_pCamera->zoomFactorY() * 1.1f);
 	}
 	else if(sym == SDLK_e)
 	{
 		if(m_pCamera)
-			m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() / 1.01f, m_pCamera->zoomFactorY() / 1.01f);
+            m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() / 1.1f, m_pCamera->zoomFactorY() / 1.1f);
 	}
 
 }

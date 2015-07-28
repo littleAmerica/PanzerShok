@@ -1,5 +1,5 @@
-#ifndef __TYPES__
-#define __TYPES__
+#ifndef TYPES_H_
+#define TYPES_H_
 
 #include "Box2D_platform.h"
 
@@ -90,7 +90,4 @@ struct Rect_t
 //	return v1.x * v2.x + v1.y * v2.y;
 //}
 
-
-
-
-#endif
+#endif // TYPES_H_

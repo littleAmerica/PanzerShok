@@ -1,5 +1,5 @@
-#ifndef _PHYSIC_OBJECT_
-#define _PHYSIC_OBJECT_
+#ifndef PHYSICS_H_
+#define PHYSICS_H_
 
 #include "../Utils/Types.h"
 
@@ -39,6 +39,4 @@ public:
 	virtual Rect_t	bounds() = 0;
 };
 
-
-
-#endif
+#endif // PHYSICS_H_

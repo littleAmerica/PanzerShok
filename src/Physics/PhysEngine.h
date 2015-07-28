@@ -1,11 +1,10 @@
-#ifndef _PHYS_ENGINE_
-#define _PHYS_ENGINE_
+#ifndef PHYS_ENGINE_H_
+#define PHYS_ENGINE_H_
 
 #include <memory>
 #include <vector>
 
 #include <Box2D/Box2D.h>
-
 #include "../Singleton.h"
 
 class PhysEngine
@@ -37,5 +36,4 @@ private:
 
 template<> void anFill<PhysEngine>(An<PhysEngine>& renderEngine);
 
-
-#endif 
+#endif // PHYS_ENGINE_H_

@@ -1,5 +1,5 @@
-#ifndef _SDL_PLATFORM_H__
-#define _SDL_PLATFORM_H_
+#ifndef SDL_PLATFORM_H_
+#define SDL_PLATFORM_H_
 
 #ifdef __unix__
     #include <SDL2/SDL.h>
@@ -10,5 +10,5 @@
     #include "SDL2_rotozoom.h"
 #endif
 
-#endif // _SDL_PLATFORM_H_
+#endif // SDL_PLATFORM_H_
 

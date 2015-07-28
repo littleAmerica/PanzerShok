@@ -1,5 +1,5 @@
-#ifndef __STATES__
-#define __STATES__
+#ifndef STATES_H_
+#define STATES_H_
 
 enum {
 	LEFT     = 0x1,
@@ -8,4 +8,4 @@ enum {
 	DOWN     = 0x8
 };
 
-#endif
+#endif // STATES_H_

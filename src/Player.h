@@ -1,5 +1,5 @@
-#ifndef _Player_H_
-#define _Player_H_
+#ifndef PLAYER_H_
+#define PLAYER_H_
 
 #include "Entity.h"
 #include "EventListener.h"
@@ -25,5 +25,4 @@ private:
 	int state;  //temporary, show the buttons currently pressed  
 };
 
-
-#endif
+#endif // PLAYER_H_

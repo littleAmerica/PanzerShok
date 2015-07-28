@@ -1,5 +1,5 @@
-#ifndef _SINGLETON_
-#define _SINGLETON_
+#ifndef SINGLETON_H_
+#define SINGLETON_H_
 
 #include <stdexcept>
 #include <typeinfo>
@@ -35,4 +35,4 @@ void anFill(An<T>& a)
 		+ typeid(T).name());
 }
 
-#endif
+#endif // SINGLETON_H_

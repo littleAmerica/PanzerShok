@@ -1,5 +1,5 @@
-#ifndef _EVENT_LISTENER_
-#define _EVENT_LISTENER_
+#ifndef EVENT_LISTENER_H_
+#define EVENT_LISTENER_H_
 
 #include "Utils/SDL_platform.h"
 
@@ -62,4 +62,4 @@ public:
 	virtual void OnUser(Uint8 type, int code, void* data1, void* data2);
 };
 
-#endif //_EVENT_LISTENER_
+#endif // EVENT_LISTENER_H_

@@ -1,10 +1,10 @@
-#ifndef _RENDER_ENGINE_
-#define _RENDER_ENGINE_
+#ifndef RENDER_ENGINE_H_
+#define RENDER_ENGINE_H_
 
+#include <string>
 #include <vector>
 
 #include <SDL2/SDL.h>
-#include <string>
 #include <SDL2/SDL_image.h>
 #include "Singleton.h"
 
@@ -42,4 +42,4 @@ private:
 
 template<> void anFill<RenderEngine>(An<RenderEngine>& renderEngine);
 
-#endif 
+#endif // RENDER_ENGINE_H_

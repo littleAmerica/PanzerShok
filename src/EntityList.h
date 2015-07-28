@@ -1,5 +1,5 @@
-#ifndef __GAME_OBJECT_LIST__
-#define __GAME_OBJECT_LIST__
+#ifndef ENTITYLIST_H_
+#define ENTITYLIST_H_
 
 #include <vector>
 #include <memory>
@@ -30,4 +30,4 @@ private:
 	std::vector<EntityPtr> m_gameObjectList;
 };
 
-#endif
+#endif // ENTITYLIST_H_

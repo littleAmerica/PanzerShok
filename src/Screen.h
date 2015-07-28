@@ -1,5 +1,5 @@
-#ifndef _SCREEN_
-#define _SCREEN_
+#ifndef SCREEN_H_
+#define SCREEN_H_
 
 #include "Utils/Types.h"
 
@@ -22,4 +22,4 @@ public:
 	SDL_Renderer*	m_pRenderer;
 };
 
-#endif
+#endif //SCREEN_H_

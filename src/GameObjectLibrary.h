@@ -1,5 +1,5 @@
-#ifndef _GAME_OBJECT_LIBRARY_
-#define _GAME_OBJECT_LIBRARY_
+#ifndef GAME_OBJECT_LIBRARY_H_
+#define GAME_OBJECT_LIBRARY_H_
 
 #include <memory>
 #include <string>
@@ -29,4 +29,4 @@ private:
 
 template<> void anFill<GameObjectLibrary>(An<GameObjectLibrary>& renderEngine);
 
-#endif
+#endif // GAME_OBJECT_LIBRARY_H_

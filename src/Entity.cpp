@@ -85,9 +85,15 @@ void Entity_Base::update(float deltaTime)
 void Entity_Base::draw(Screen* pScreen, Camera* pCamera /*= NULL*/)
 {
 	//temporary, until we get animator class/texture manager and etc;
-	Texture text_;
-	text_.SetRenderer(RenderEngine::Instance().renderer());
-    text_.loadImage(kResourceFolder + "tank1.png");
+    static Texture text_;
+    static bool init = false;
+    if(!init)
+    {
+        text_.SetRenderer(RenderEngine::Instance().renderer());
+        text_.loadImage(kResourceFolder + "tank1.png");
+
+        init = true;
+    }
 
 
 

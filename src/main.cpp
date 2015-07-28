@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv)
 {
-	Game game("Test", 200, 200, 600, 600);
+    Game game("Test", 200, 200, 840, 480);
 	game.run();
 
 	return 0;

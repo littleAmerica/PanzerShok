@@ -1,5 +1,5 @@
-#ifndef _GAME_H_
-#define _GAME_H_
+#ifndef GAME_H_
+#define GAME_H_
 
 #include <string>
 #include <vector>
@@ -69,4 +69,4 @@ private:
 	int				m_height;
 };
 
-#endif
+#endif // GAME_H_

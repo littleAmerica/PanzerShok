@@ -1,5 +1,5 @@
-#ifndef _BOX2D_PLATFORM_H_
-#define _BOX2D_PLATFORM_H_
+#ifndef BOX2D_PLATFORM_H_
+#define BOX2D_PLATFORM_H_
 
 #ifdef __unix__
     #include <Box2D/Box2D.h>
@@ -7,5 +7,4 @@
     #include "Box2D.h"
 #endif
 
-
-#endif
+#endif // BOX2D_PLATFORM_H_

@@ -1,11 +1,10 @@
-#ifndef _TEXTURE_
-#define _TEXTURE_
+#ifndef TEXTURE_H_
+#define TEXTURE_H_
 
 #include <string>
 #include <memory>
 
 #include "Utils/SDL_platform.h"
-
 
 class Texture;
 
@@ -41,4 +40,4 @@ private:
 
 SDL_Surface* loadSurface( const std::string& path, SDL_PixelFormat* format = NULL);
 
-#endif
+#endif // TEXTURE_H_

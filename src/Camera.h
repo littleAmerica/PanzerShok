@@ -1,10 +1,9 @@
-#ifndef __CAMERA__
-#define __CAMERA__
-
-#include "Utils/Types.h"
+#ifndef CAMERA_H_
+#define CAMERA_H_
 
 #include <memory>
 
+#include "Utils/Types.h"
 #include "Entity.h"
 
 class Camera
@@ -41,4 +40,4 @@ private:
 
 typedef std::shared_ptr<Camera> CameraPtr;
 
-#endif //__CAMERA__
+#endif //CAMERA_H_

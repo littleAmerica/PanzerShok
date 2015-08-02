@@ -20,7 +20,7 @@ public:
 
 private:
 	void	updateDrive();
-	void	updateTurn();
+	void updateTurn(float deltaTime);
 
 	int state;  //temporary, show the buttons currently pressed  
 };

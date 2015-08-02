@@ -23,7 +23,6 @@ public:
 	virtual float	angularVelocity(); 
 
 	virtual Vec2 forwardNormal();
-
 	virtual float	currentSpeed();
 
 	virtual float	mass();
@@ -31,6 +30,9 @@ public:
 	virtual float	inertia();	
 	virtual float	angle();
 	virtual Rect_t	bounds();
+
+
+	virtual void	stopMoving();
 
 	virtual void	setEntityID(int id); 
 	virtual int		entityID();

@@ -40,7 +40,7 @@ void Game::run()
 
 		handleEvents();
 
-		update();
+		update(1.f / FRAMES_PER_SECOND);
 
 		render();
 
@@ -63,7 +63,7 @@ void Game::init()
 
 	m_running = true;
 					
-	player = new Player(100, 100);
+	player = new Player(-100, -100);
 	m_eventListeners.push_back(player);
 	m_gameObjectList.addGameObject(EntityPtr(player));
 
@@ -80,11 +80,11 @@ void Game::render()
 	m_pScreen->swapBuffer();
 }
 
-void Game::update()
+void Game::update(float timeStep)
 {
 	m_physEngine->step(1.f/60);
 
-	m_gameObjectList.update(0.f); 
+	m_gameObjectList.update(timeStep); 
 }
 
 void Game::handleEvents()

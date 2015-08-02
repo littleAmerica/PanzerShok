@@ -37,52 +37,49 @@ Player::Player(float x, float y) :
 }
 
 
-void Player::updateTurn()
+void Player::updateTurn(float deltaTime)
 {
 
-	float desiredTorque = 0;
+	float angulatAcceleration = 0;
 	switch ( state & (LEFT|RIGHT) ) {
-	case LEFT:  desiredTorque = -15 * 32 * 16 * 16;  break;
-	case RIGHT: desiredTorque = +15 * 32 * 16 * 16; break;
+	case LEFT:  angulatAcceleration = -10;  break;
+	case RIGHT: angulatAcceleration = +10; break;
 	default: return;//nothing
 	}
-	m_body->applyTorque( desiredTorque);
-
-	//std::cout << m_body->GetAngle() << "\n";
-
+	float nextAngle = m_body->angle() + m_body->angularVelocity() / 60.0;
+	float totalRotation = 15.f;
+	
+	float torque = m_body->inertia() * angulatAcceleration;
+	m_body->applyTorque(torque);
 }
 
 
 void Player::updateDrive()
 {
-	//find desired speed
-	float desiredSpeed = 0;
-	switch ( state & (UP|DOWN) ) {
-	case UP:   desiredSpeed = m_maxForwardSpeed;  break;
-	case DOWN: desiredSpeed = m_maxBackwardSpeed; break;
-	default: return;//do nothing
+	if ((int)(state & UP)  == UP)
+	{
+		//Ftraction = u * Engineforce, 
+		Vec2 Ftraction = m_EngineForce * m_body->forwardNormal(); 
+		m_body->applyForce(Ftraction);
 	}
-
-	//find current speed in forward direction
-	Vec2 currentForwardNormal = m_body->forwardNormal();
-	float currentSpeed = m_body->currentSpeed();
-
-	//apply necessary force
-	float force = 0;
-	if ( desiredSpeed > currentSpeed )
-		force = m_maxDriveForce;
-	else if ( desiredSpeed < currentSpeed )
-		force = -m_maxDriveForce;
-	else
-		return;
-	m_body->applyForce( force * currentForwardNormal);
-
-	//		std::cout << m_body->GetWorldCenter().x << " " << m_body->GetWorldCenter().y << "\n";
+	else if ((int)(state & DOWN) == DOWN)
+	{
+		//Fbraking = -u * Cbraking, 
+		if(m_body->currentSpeed() > 5)
+		{
+			Vec2 Ftraction = - m_Cbraking * m_body->forwardNormal(); 
+			m_body->applyForce(Ftraction);
+		}
+		else
+		{
+			m_body->stopMoving();
+		}
+	}
 }
 
 void Player::update(float deltaTime)
 {
 	updateDrive();
-	updateTurn();
+	updateTurn(deltaTime);
 	Entity_Base::update(deltaTime);
 }

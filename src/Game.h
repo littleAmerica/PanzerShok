@@ -37,7 +37,7 @@ private:
 	//Game routine
 	void init();
 	void render();
-	void update();
+	void update(float timeStep);
 	void handleEvents();
 	void clean();
 	bool running();

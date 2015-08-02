@@ -12,6 +12,15 @@ class Entity;
 typedef std::shared_ptr<Entity> EntityPtr;
 
 
+struct Enity_Info
+{
+	float engineForce;
+	float Cbraking;
+	float Cdrag;
+	float Crr;
+};
+
+
 class Entity
 {
 public:
@@ -34,7 +43,7 @@ public:
 class Entity_Base: public Entity
 {
 public:
-	Entity_Base(float x, float y);
+	Entity_Base(float x, float y, Enity_Info* info = NULL);
 	virtual ~Entity_Base();
 
 	//the update by default applies friction slow mechanism
@@ -54,9 +63,11 @@ protected:
 
 	std::shared_ptr<Physics> m_body;
 
-	float m_maxForwardSpeed;
-	float m_maxBackwardSpeed;
-	float m_maxDriveForce;
+	float m_EngineForce;
+	float m_Cbraking;
+	
+	float m_Cdrag;		//Air Drag Constant
+	float m_Crr; // Rolling Resistance Constant
 
 	const int m_id;	
 	static int ID_counter;

@@ -106,6 +106,12 @@ float Physics_Rigid::currentSpeed()
 	return DotProduct( forwardVelocity(), currentForwardNormal );
 }
 
+void Physics_Rigid::stopMoving()
+{
+	m_body->SetLinearVelocity(b2Vec2(0,0));
+	m_body->SetAngularVelocity(0);
+}
+
 
 
 

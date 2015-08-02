@@ -20,14 +20,15 @@ public:
 	
 	virtual void	applyForce(const Vec2& force) = 0;
 	virtual void	applyTorque(float torque) = 0;
-	virtual void applyLinearImpulse(const Vec2& impulse) = 0;
+	virtual void	applyLinearImpulse(const Vec2& impulse) = 0;
 	virtual void	applyAngularImpulse(float impulse) = 0;
-	
-	virtual Vec2 linearVelocity() = 0;
-	virtual Vec2 lateralVelocity() = 0;
-	virtual Vec2 forwardVelocity() = 0;
+	virtual	void	stopMoving() = 0;
+
+	virtual Vec2	linearVelocity() = 0;
+	virtual Vec2	lateralVelocity() = 0;
+	virtual Vec2	forwardVelocity() = 0;
 	virtual float	angularVelocity() = 0;		//angular velocity in radiance/second
-	
+
 	virtual Vec2 forwardNormal() = 0;
 	
 	virtual float	currentSpeed() = 0;			//current speed in forward direction

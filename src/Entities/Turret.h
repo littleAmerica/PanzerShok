@@ -19,7 +19,7 @@ class Turret
 public:
 	Turret(float x, float y, const Turret_Info& info); 	
 	virtual void lookAt(Vec2 coord);
-
+	virtual void fire();
 protected:
 	Vec2 m_lookAt;
 };

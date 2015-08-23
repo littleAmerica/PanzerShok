@@ -70,15 +70,8 @@ public:
 	virtual	int id();
 
 protected:
-	virtual void	updateFriction();
 
 	PhysicsPtr m_body;
-
-	float m_EngineForce;
-	float m_Cbraking;
-	
-	float m_Cdrag;		//Air Drag Constant
-	float m_Crr; // Rolling Resistance Constant
 
 	int m_textureID;
 

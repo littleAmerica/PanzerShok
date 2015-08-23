@@ -21,3 +21,8 @@ void Turret::lookAt(Vec2 coord)
 
 	m_body->setAngle(angle - 3.14f/2);
 }
+
+void Turret::fire()
+{
+
+}

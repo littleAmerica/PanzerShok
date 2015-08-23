@@ -15,37 +15,49 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Camera.cpp" />
+    <ClCompile Include="..\src\Entities\Entity.cpp" />
+    <ClCompile Include="..\src\Entities\Player.cpp" />
+    <ClCompile Include="..\src\Entities\Tank.cpp" />
+    <ClCompile Include="..\src\Entities\Turret.cpp" />
     <ClCompile Include="..\src\EventListener.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
-    <ClCompile Include="..\src\Entity.cpp" />
     <ClCompile Include="..\src\EntityList.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Physics\Joint.cpp" />
     <ClCompile Include="..\src\Physics\PhysEngine.cpp" />
+    <ClCompile Include="..\src\Physics\Physics_Base.cpp" />
     <ClCompile Include="..\src\Physics\Physics_Rigid.cpp" />
-    <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\RenderEngine.cpp" />
     <ClCompile Include="..\src\Screen.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
+    <ClCompile Include="..\src\TextureManager.cpp" />
     <ClCompile Include="..\src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Camera.h" />
+    <ClInclude Include="..\src\Entities\Entity.h" />
+    <ClInclude Include="..\src\Entities\Player.h" />
+    <ClInclude Include="..\src\Entities\Tank.h" />
+    <ClInclude Include="..\src\Entities\Turret.h" />
     <ClInclude Include="..\src\EventListener.h" />
     <ClInclude Include="..\src\Game.h" />
-    <ClInclude Include="..\src\Entity.h" />
     <ClInclude Include="..\src\EntityList.h" />
+    <ClInclude Include="..\src\Physics\Joint.h" />
     <ClInclude Include="..\src\Physics\PhysEngine.h" />
     <ClInclude Include="..\src\Physics\Physics.h" />
+    <ClInclude Include="..\src\Physics\Physics_Base.h" />
     <ClInclude Include="..\src\Physics\Physics_Rigid.h" />
-    <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\RenderEngine.h" />
     <ClInclude Include="..\src\Screen.h" />
-    <ClInclude Include="..\src\Singleton.h" />
     <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\Texture.h" />
+    <ClInclude Include="..\src\TextureManager.h" />
     <ClInclude Include="..\src\Timer.h" />
+    <ClInclude Include="..\src\Utils\Asserts.h" />
     <ClInclude Include="..\src\Utils\Box2D_platform.h" />
+    <ClInclude Include="..\src\Utils\Resources.h" />
     <ClInclude Include="..\src\Utils\SDL_platform.h" />
+    <ClInclude Include="..\src\Utils\Singleton.h" />
     <ClInclude Include="..\src\Utils\Types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -100,14 +112,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\external\SDL2-2.0.3\include;$(ProjectDir)..\external\SDL2_image-2.0.0\include;$(ProjectDir)..\external\Box2D_v2.3.0\include\;$(ProjectDir)..\external\Box2D_v2.3.0\include\Common;$(ProjectDir)..\external\SDL2_gfx-1.0.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\external\SDL2-2.0.3\include;$(ProjectDir)..\external\SDL2_image-2.0.0\include;$(ProjectDir)..\external\Box2D_v2.3.0\include\;$(ProjectDir)..\external\Box2D_v2.3.0\include\Common;$(ProjectDir)..\external\SDL2_gfx-1.0.1\include;$(ProjectDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\external\SDL2-2.0.3\lib\x86;$(ProjectDir)..\external\SDL2_image-2.0.0\lib\x86;$(ProjectDir)..\external\Box2D_v2.3.0\lib\x86;$(ProjectDir)..\external\SDL2_gfx-1.0.1\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;Box2D.lib;SDL2_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\external\SDL2-2.0.3\lib\x86;$(ProjectDir)..\external\SDL2_image-2.0.0\lib\x86;$(ProjectDir)..\external\Box2D_v2.3.0\lib\x86;$(ProjectDir)..\external\SDL2_gfx-1.0.1\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>

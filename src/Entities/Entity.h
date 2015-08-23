@@ -7,6 +7,7 @@
 
 class Camera;
 class Screen;
+class TextureManager;
 
 class Entity;
 typedef std::shared_ptr<Entity> EntityPtr;
@@ -14,6 +15,13 @@ typedef std::shared_ptr<Entity> EntityPtr;
 
 struct Enity_Info
 {
+	enum Type{
+		eRigid,
+		eKinematic
+	};
+
+	Type type;
+
 	float engineForce;
 	float Cbraking;
 	float Cdrag;
@@ -48,20 +56,23 @@ public:
 
 	//the update by default applies friction slow mechanism
 	virtual void update(float deltaTime); 
-	void draw(Screen* pScreen, Camera* pCamera = NULL);
+	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);
 	
+	//temporary
+	virtual void setTexture(int texture);
 
 	virtual Vec2	center();
 	float	angle();
 	virtual Rect_t	bounds();
 	virtual Rect_t boundsWord();
-
+	virtual PhysicsPtr body();
+	
 	virtual	int id();
 
 protected:
 	virtual void	updateFriction();
 
-	std::shared_ptr<Physics> m_body;
+	PhysicsPtr m_body;
 
 	float m_EngineForce;
 	float m_Cbraking;
@@ -69,38 +80,14 @@ protected:
 	float m_Cdrag;		//Air Drag Constant
 	float m_Crr; // Rolling Resistance Constant
 
+	int m_textureID;
+
 	const int m_id;	
 	static int ID_counter;
 
 	An<PhysEngine>	m_physEngine;
+	An<TextureManager> m_textureManager;
 };
 
-
-//class Entity_Actor: public Entity
-//{
-//public:
-//	Entity_Actor(int x = 100, int y = 100);
-//	virtual ~Entity_Actor();
-//
-//	//the update by default applies friction slow mechanism
-//	virtual void update(float deltaTime); 
-//	virtual void draw();
-//
-//
-//	Vec2	center();
-//	float	angle();
-//	Rect_t	bounds();
-//
-//protected:
-//	virtual void	updateFriction();
-//
-//	Physics_Rigid m_body;
-//
-//	float m_maxForwardSpeed;
-//	float m_maxBackwardSpeed;
-//	float m_maxDriveForce;
-//
-//	An<PhysEngine>	m_physEngine;
-//};
 
 #endif

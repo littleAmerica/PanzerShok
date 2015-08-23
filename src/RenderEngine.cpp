@@ -44,7 +44,7 @@ bool RenderEngine::init(Game* game)
 	if (m_pRenderer == NULL)
 		return false;
 
-	SDL_SetRenderDrawColor(m_pRenderer,	0, 0, 0, 255);
+	SDL_SetRenderDrawColor(m_pRenderer,	125, 125, 125, 255);
 
 	//Initialize Image loading
 	int imgFlags = IMG_INIT_PNG;

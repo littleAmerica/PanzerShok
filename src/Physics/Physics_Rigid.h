@@ -3,47 +3,59 @@
 
 #include "../Utils/Box2D_platform.h"
 #include "Physics.h"
+#include "Physics_Base.h"
 
-#include "../Singleton.h"
+#include "Joint.h"
+
+#include "Utils/Singleton.h"
 #include "PhysEngine.h"
 
-class Physics_Rigid : public Physics
+class Physics_Rigid : public Physics_Base
 {
 public:
 	Physics_Rigid(const PhysicInfo&  physicInfo, int x, int y);
 
-	virtual void	applyForce(const Vec2& force);
-	virtual void	applyTorque(float torque);
-	virtual void	applyLinearImpulse(const Vec2& impulse);
-	virtual void	applyAngularImpulse(float impulse);
+	Rect_t bounds();
 
-	virtual Vec2 linearVelocity();
-	virtual Vec2 lateralVelocity();
-	virtual Vec2 forwardVelocity();
-	virtual float	angularVelocity(); 
-
-	virtual Vec2 forwardNormal();
-	virtual float	currentSpeed();
-
-	virtual float	mass();
-	virtual Vec2	worldCenter();
-	virtual float	inertia();	
-	virtual float	angle();
-	virtual Rect_t	bounds();
-
-
-	virtual void	stopMoving();
-
-	virtual void	setEntityID(int id); 
-	virtual int		entityID();
 private:
-
-	b2Body* m_body;
 	const PhysicInfo&  m_physicInfo;
 
 	int	m_entityID;
 
 	An<PhysEngine>	m_physEngine;
 };
+
+
+class Physics_Static : public Physics_Base
+{
+public:
+	Physics_Static(const PhysicInfo&  physicInfo, int x, int y);
+
+	Rect_t bounds();
+
+private:
+	const PhysicInfo&  m_physicInfo;
+
+	int	m_entityID;
+
+	An<PhysEngine>	m_physEngine;
+};
+
+
+class Physics_Kinematic : public Physics_Base
+{
+public:
+	Physics_Kinematic(const PhysicInfo&  physicInfo, int x, int y);
+
+	Rect_t bounds();
+
+private:
+	const PhysicInfo&  m_physicInfo;
+
+	int	m_entityID;
+
+	An<PhysEngine>	m_physEngine;
+};
+
 
 #endif // _PHYSIC_RIGIT_OBJECT_

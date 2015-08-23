@@ -5,7 +5,11 @@
 
 #include <memory>
 
-#include "Entity.h"
+#include "Entities/Entity.h"
+#include "Utils/Singleton.h"
+
+class Camera;
+typedef std::shared_ptr<Camera> CameraPtr;
 
 class Camera
 {
@@ -38,6 +42,21 @@ private:
 
 	float		m_zoomFactorX, m_zoomFactorY; // zoom factor of camera, is equal to screenSize / cameraSize 
 };
+
+
+class CameraManager
+{
+	CameraManager(){}
+public:
+	static	CameraManager& Instance();
+	CameraPtr	activeCamera();
+	void	setActiveCamara(CameraPtr activeCamera);
+
+private:
+	CameraPtr m_currentCamera;
+};
+
+template<> void anFill<CameraManager>(An<CameraManager>& renderEngine);
 
 typedef std::shared_ptr<Camera> CameraPtr;
 

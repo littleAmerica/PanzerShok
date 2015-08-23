@@ -1,6 +1,8 @@
 #ifndef _TEXTURE_
 #define _TEXTURE_
 
+#include "Utils/Singleton.h"
+
 #include <string>
 #include <memory>
 
@@ -8,23 +10,19 @@
 
 
 class Texture;
+class RenderEngine;
+class TextureManager;
 
 typedef std::shared_ptr<Texture> TexturePtr;
 typedef SDL_Texture* TextureHandle; 
+typedef int TextureID;
 
 class Texture
 {
 public:
 	Texture();
-	Texture(TextureHandle texture, int w = 0, int h = 0);
 	~Texture();
 
-	void	SetRenderer(SDL_Renderer* renderer);
-	void	loadImage(const std::string& path);
-
-	//void render( int x, int y);
-	
-	//std::shared_ptr<Texture>	scaleTexture(int new_width, int new_heigh);
 	SDL_Rect	rect() const; 
 	TextureHandle textureHandle() const;
 
@@ -32,13 +30,16 @@ public:
 	int height() const;
 
 private:
+	Texture(TextureHandle handle, SDL_Rect rect);
+
+	friend class TextureManager;
 	//The actual hardware texture
 	TextureHandle m_texture;
 
-	SDL_Renderer* m_renderer;
+	An<RenderEngine> m_renderEngine;
 	SDL_Rect m_rect;
 };
 
-SDL_Surface* loadSurface( const std::string& path, SDL_PixelFormat* format = NULL);
+
 
 #endif

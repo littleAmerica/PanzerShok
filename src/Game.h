@@ -6,12 +6,13 @@
 
 #include "Texture.h"
 #include "EventListener.h"
-#include "Singleton.h"
+#include "Utils//Singleton.h"
 #include "EntityList.h"
 #include "Camera.h"
 
 class PhysEngine;
 class RenderEngine;
+class TextureManager;
 class GameObjectLibrary;
 class Screen;
 class Player;
@@ -24,7 +25,6 @@ public:
 
 	void run();
 
-	CameraPtr	camera();
 	std::string	gameName();
 	//we can consider getting rid of windows setting in Game class
 	//maybe we should add window class to encapsulate this concepts (if needed)
@@ -47,18 +47,20 @@ private:
 	virtual void OnLButtonDown(int mX, int mY);
 	virtual void OnKeyDown(SDL_Keycode sym, Uint16 mod);
 
+	CameraPtr camera();
 	
 	bool			m_running;
 
 	An<PhysEngine>	m_physEngine;
 	An<RenderEngine> m_renderEngine;
+	An<TextureManager> m_textureManager;
+	An<CameraManager> m_cameraManager;
 	//An<GameObjectLibrary> m_gameObjectLibrary;
 
 	//should we make own singleton class for listeners?
 	std::vector<EventListener*> m_eventListeners;
 	EntityList m_gameObjectList;
 
-	CameraPtr			m_pCamera;
 	Screen*				m_pScreen;
 	Player*				player;
 

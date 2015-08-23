@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "States.h"
+#include <math.h>
 
 void Player::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 {
@@ -30,7 +31,7 @@ void Player::OnKeyUp(SDL_Keycode sym, Uint16 mod)
 }
 
 Player::Player(float x, float y) :
-	Entity_Base(x, y),
+	Tank(x, y),
 	state(0)
 {
 	
@@ -72,7 +73,7 @@ void Player::updateDrive()
 		}
 		else
 		{
-			m_body->stopMoving();
+			//m_body->stopMoving();
 		}
 	}
 }
@@ -82,4 +83,11 @@ void Player::update(float deltaTime)
 	updateDrive();
 	updateTurn(deltaTime);
 	Entity_Base::update(deltaTime);
+}
+
+#include <iostream>
+
+void Player::OnMouseMove(int mX, int mY, int relX, int relY, bool Left,bool Right,bool Middle)
+{
+	lookAt(Vec2(mX, mY));
 }

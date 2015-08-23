@@ -1,11 +1,14 @@
 #ifndef _Player_H_
 #define _Player_H_
 
-#include "Entity.h"
+#include "Tank.h"
 #include "EventListener.h"
 
+
+//TODO
+//inheritance from Tank probably is temporary. Need to make own class with tank as a field
 class Player : 
-	public Entity_Base,
+	public Tank,
 	public EventListener 
 {
 public:
@@ -17,6 +20,7 @@ public:
 	//EventListener
 	virtual void OnKeyDown(SDL_Keycode sym, Uint16 mod);
 	virtual void OnKeyUp(SDL_Keycode sym, Uint16 mod);
+	virtual void OnMouseMove(int mX, int mY, int relX, int relY, bool Left,bool Right,bool Middle);
 
 private:
 	void	updateDrive();

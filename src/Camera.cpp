@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+
 Camera::Camera(int screenWidth, int screenHeight, const Vec2& center /*= Vec2()*/):
 	m_screenWidth(screenWidth),
 	m_screenHeight(screenHeight),
@@ -9,6 +10,9 @@ Camera::Camera(int screenWidth, int screenHeight, const Vec2& center /*= Vec2()*
 {
 	m_topleft = center - Vec2(screenWidth / 2, screenHeight / 2);
 }
+
+
+
 
 Rect_t Camera::world2camera(Rect_t rect)
 {
@@ -97,3 +101,25 @@ void Camera::setCenter(const Vec2& center)
 	m_topleft = center - Vec2(m_screenWidth / 2, m_screenHeight / 2);
 }
 
+
+template<> void anFill<CameraManager>(An<CameraManager>& cameraManager)
+{
+	CameraManager& cm = CameraManager::Instance();
+	cameraManager = &cm;
+}
+
+CameraManager& CameraManager::Instance()
+{
+	static CameraManager cameraManager;
+	return cameraManager;
+}
+
+CameraPtr CameraManager::activeCamera()
+{
+	return m_currentCamera;
+}
+
+void CameraManager::setActiveCamara(CameraPtr camera)
+{
+	m_currentCamera = camera;
+}

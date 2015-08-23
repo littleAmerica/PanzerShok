@@ -38,3 +38,8 @@ int EntityList::id()
 	return 0;
 }
 
+void EntityList::clear()
+{
+	m_gameObjectList.clear();
+}
+

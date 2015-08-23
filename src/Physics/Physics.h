@@ -1,15 +1,17 @@
 #ifndef _PHYSIC_OBJECT_
 #define _PHYSIC_OBJECT_
 
-#include "../Utils/Types.h"
+#include "Utils/Types.h"
 
 struct PhysicInfo
 {
 	Rect_t	bounds;
+	float angle; //default angle in world coordinate
 };
 
+class Physics;
+typedef std::shared_ptr<Physics> PhysicsPtr;
 
-//TODO remove all b2 types from the interface for better compatibility
 class Physics
 {
 public:
@@ -23,6 +25,8 @@ public:
 	virtual void	applyLinearImpulse(const Vec2& impulse) = 0;
 	virtual void	applyAngularImpulse(float impulse) = 0;
 	virtual	void	stopMoving() = 0;
+
+	virtual void	setAngle(float angle) = 0;
 
 	virtual Vec2	linearVelocity() = 0;
 	virtual Vec2	lateralVelocity() = 0;
@@ -38,6 +42,8 @@ public:
 	virtual float	inertia() = 0;
 	virtual float	angle() = 0;
 	virtual Rect_t	bounds() = 0;
+
+	virtual void	attachPhysics(Physics* other, const Vec2& place) = 0; //make a join
 };
 
 

@@ -4,12 +4,13 @@
 #include <vector>
 #include <memory>
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 
 class Enity;
 typedef std::shared_ptr<Entity> EntityPtr;
 
 class EntityList : public Entity
+
 {
 public:
 
@@ -22,7 +23,7 @@ public:
 	EntityPtr getNthGameObject(size_t index) const;
 	size_t GetSize() const;
 
-
+	virtual void clear();
 private:
 	//hold all gameObjects
 	//We can consider rewriting this in case 

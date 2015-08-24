@@ -38,7 +38,7 @@ private:
 	int			m_screenWidth;
 	int			m_screenHeight;
 
-	Vec2		m_topleft;
+	Vec2		m_topleftWorld;
 
 	float		m_zoomFactorX, m_zoomFactorY; // zoom factor of camera, is equal to screenSize / cameraSize 
 };

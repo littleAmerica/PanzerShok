@@ -7,10 +7,11 @@
 
 Tank::Tank(Vec2 pos, Tank_Info*tank_info/* = NULL*/):
 	Entity_Base(pos, tank_info),
-	m_state(0)
+	m_state(0),
+	m_tankInfo(*tank_info)
 {
 	Turret_Info turret_Info;
-	turret_Info.bounds = Rect_t(0, 0, 16, 16);
+	turret_Info.bounds = Rect_t(0, 0, 8, 8);
 	turret_Info.type = Entity_Info::eRigid;
 	turret_Info.textureID = 2;
 
@@ -18,12 +19,6 @@ Tank::Tank(Vec2 pos, Tank_Info*tank_info/* = NULL*/):
 	Turret* turret = new Turret(_center, turret_Info);
 
 	attachTurret(turret);
-
-	m_EngineForce = 150000;
-	m_Cbraking = 50000;
-
-	m_Cdrag = 0.5;		//Air Drag Constant
-	m_Crr = m_Cdrag * 30; // Rolling Resistance Constant
 }
 
 void Tank::draw(Screen* pScreen, Camera* pCamera /*= NULL*/)
@@ -54,14 +49,16 @@ void Tank::updateFriction()
 	//			A - frontal area of car, 
 	//			rho - density of air (1.29) 
 	Vec2 speed =  m_body->forwardVelocity();
-	b2Vec2 Fdrag = - m_Cdrag * speed.Length() * speed;
+	b2Vec2 Fdrag = - m_tankInfo.Cdrag * speed.Length() * speed;
 
 	//==================================
 	//The friction of the wheels (Rolling Resistance Constant)
 	//Frr = - Crr * v 
-	b2Vec2 Frr = - m_Crr * speed; 
+	b2Vec2 Frr = - m_tankInfo.Crr * speed; 
 
-	m_body->applyForce( Fdrag + Frr);
+	std::cout << "speed: " << speed.x << " " << speed.y << "\n";
+
+	//m_body->applyForce( Fdrag + Frr);
 }
 
 void Tank::update(float deltaTime)
@@ -94,15 +91,16 @@ void Tank::updateDrive()
 	if ((int)(m_state & UP)  == UP)
 	{
 		//Ftraction = u * Engineforce, 
-		Vec2 Ftraction = m_EngineForce * m_body->forwardNormal(); 
-		m_body->applyForce(Ftraction);
+		Vec2 Ftraction = m_tankInfo.engineForce * m_body->forwardNormal(); 
+		//m_body->applyForce(Ftraction);
+		m_body->setLinearVelocity(80 * m_body->forwardNormal());
 	}
 	else if ((int)(m_state & DOWN) == DOWN)
 	{
 		//Fbraking = -u * Cbraking, 
 		if(m_body->currentSpeed() > 5)
 		{
-			Vec2 Ftraction = - m_Cbraking * m_body->forwardNormal(); 
+			Vec2 Ftraction = - m_tankInfo.Cbraking * m_body->forwardNormal(); 
 			m_body->applyForce(Ftraction);
 		}
 		else

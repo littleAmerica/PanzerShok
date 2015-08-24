@@ -59,8 +59,9 @@ void Game::init()
 {
 	m_physEngine->init();
 	m_renderEngine->init(this);
-	m_cameraManager->setActiveCamara(CameraPtr(new Camera(m_width, m_height)));
-	camera()->setCameraFactor(1.5f, 1.5f);
+	m_cameraManager->setActiveCamara(CameraPtr(new Camera(m_width, m_height )));
+	camera()->setCameraFactor(3.f, 3.f);
+	camera()->setCenter(Vec2(100, 100));
 	
 	m_pScreen = m_renderEngine->screen();
 
@@ -81,8 +82,6 @@ void Game::init()
 
 void Game::render()
 {
-	//m_pCamera->setCenter(player->center());
-
 	m_pScreen->clear();
 	m_gameObjectList->draw(m_pScreen, m_cameraManager->activeCamera().get());
 	m_pScreen->swapBuffer();

@@ -5,12 +5,12 @@
 #include "Turret.h"
 #include "EventListener.h"
 
-class Tank_Info : public Entity_Info
+struct Tank_Info : public Entity_Info
 {
 	float engineForce;
 	float Cbraking;
-	float Cdrag;
-	float Crr;
+	float Cdrag;	//Air Drag Constant
+	float Crr;		// Rolling Resistance Constant
 };
 
 class Tank;
@@ -40,12 +40,7 @@ protected:
 
 	int	m_state;
 
-	float m_EngineForce;
-	float m_Cbraking;
-
-	float m_Cdrag;		//Air Drag Constant
-	float m_Crr; // Rolling Resistance Constant
-
+	Tank_Info m_tankInfo;
 
 	TurretPtr m_turret;
 };

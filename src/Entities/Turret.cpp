@@ -26,7 +26,7 @@ void Turret::fire()
 {
 	Bullet_Info info;
 	info.type = Entity_Info::eRigid;
-	info.bounds = Rect_t(0, 0, 8, 8);
+	info.bounds = Rect_t(0, 0, 4, 4);
 	EntityPtr bullet = EntityPtr(new Bullet(firePlace(), angle(), &info));
 	EntityList::instance().addGameObject(bullet);
 }

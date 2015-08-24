@@ -4,9 +4,9 @@
 #include <memory>
 #include <vector>
 
-#include "../Utils/Box2D_platform.h"
+#include "Utils/Box2D_platform.h"
 
-#include "../Singleton.h"
+#include "Utils/Singleton.h"
 
 class PhysEngine
 {

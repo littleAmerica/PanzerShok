@@ -4,17 +4,19 @@
 #include <iostream>
 
 #include "RenderEngine.h"
-#include "Player.h"
+#include "Entities/Player.h"
 #include "Physics/PhysEngine.h"
 #include "GameObjectLibrary.h"
+#include "TextureManager.h"
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 #include "States.h"
 #include "Timer.h"
+#include "Utils/Resources.h"
+#include "Utils/Asserts.h"
 
 Game::Game(const std::string& name, int xpos, int ypos, int height, int width)
     : m_running(false),
-      m_pCamera(),
       m_pScreen(NULL),
       player(NULL),
 	m_name(name),
@@ -57,26 +59,31 @@ void Game::init()
 {
 	m_physEngine->init();
 	m_renderEngine->init(this);
-	m_pCamera.reset(new Camera(m_width, m_height));
+	m_cameraManager->setActiveCamara(CameraPtr(new Camera(m_width, m_height )));
+	camera()->setCameraFactor(3.f, 3.f);
+	camera()->setCenter(Vec2(100, 100));
 	
 	m_pScreen = m_renderEngine->screen();
 
 	m_running = true;
 					
-	player = new Player(-100, -100);
+	player = new Player(100, 100);
 	m_eventListeners.push_back(player);
-	m_gameObjectList.addGameObject(EntityPtr(player));
+	m_gameObjectList = &EntityList::instance();
+	m_gameObjectList->addGameObject(player->entity());
 
+	//TODO move to resource manager
+	m_textureManager->LoadTexture(kResourceFolder + "tank1.png", 1);
+	m_textureManager->LoadTexture(kResourceFolder + "turret1.png", 2);
+	m_textureManager->LoadTexture(kResourceFolder + "bullet1.png", 3);
 
 	m_eventListeners.push_back(this);
 }
 
 void Game::render()
 {
-	//m_pCamera->setCenter(player->center());
-
 	m_pScreen->clear();
-	m_gameObjectList.draw(m_pScreen, m_pCamera.get());
+	m_gameObjectList->draw(m_pScreen, m_cameraManager->activeCamera().get());
 	m_pScreen->swapBuffer();
 }
 
@@ -84,7 +91,7 @@ void Game::update(float timeStep)
 {
 	m_physEngine->step(1.f/60);
 
-	m_gameObjectList.update(timeStep); 
+	m_gameObjectList->update(timeStep); 
 }
 
 void Game::handleEvents()
@@ -99,6 +106,9 @@ void Game::handleEvents()
 
 void Game::clean()
 {
+	m_eventListeners.clear();
+	m_gameObjectList->clear();
+	
 	m_physEngine->clean();
 	m_renderEngine->clean();	
 }
@@ -114,16 +124,11 @@ void Game::OnExit()
 	m_running = false;
 }
 
-void Game::OnLButtonDown(int mX, int mY)
-{
-	Vec2 word = m_pCamera->camera2world(Vec2(mX, mY));
-	
-	m_gameObjectList.addGameObject(EntityPtr(new Entity_Base(word.x, word.y)));
-}
-
 CameraPtr Game::camera()
 {
-	return m_pCamera;
+	CameraPtr _camera = m_cameraManager->activeCamera();
+	ASSERT(_camera);
+	return _camera;
 }
 
 std::string Game::gameName()
@@ -155,15 +160,21 @@ void Game::OnKeyDown(SDL_Keycode sym, Uint16 mod)
 {
 	if(sym == SDLK_q)
 	{
-		if(m_pCamera)
-			m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() * 1.01f, m_pCamera->zoomFactorY() * 1.01f);
+		camera()->setCameraFactor(camera()->zoomFactorX() * 1.01f, camera()->zoomFactorY() * 1.01f);
 	}
 	else if(sym == SDLK_e)
 	{
-		if(m_pCamera)
-			m_pCamera->setCameraFactor(m_pCamera->zoomFactorX() / 1.01f, m_pCamera->zoomFactorY() / 1.01f);
+		camera()->setCameraFactor(camera()->zoomFactorX() / 1.01f, camera()->zoomFactorY() / 1.01f);
 	}
 
+}
+
+void Game::OnLButtonDown(int mX, int mY)
+{
+	//Vec2 word = camera()->camera2world(Vec2(mX, mY));
+
+	//Entity_Info info = {Entity_Info::eKinematic, Rect_t(0, 0, 32, 32), 1};
+	//m_gameObjectList->addGameObject(EntityPtr(new Entity_Base(Vec2(mX, mY), &info)));
 }
 
 //

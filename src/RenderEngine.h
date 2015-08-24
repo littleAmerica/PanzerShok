@@ -5,9 +5,9 @@
 
 #include "Utils/SDL_platform.h"
 #include <string>
-#include "Singleton.h"
+#include "Utils//Singleton.h"
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 #include "Screen.h"
 
 class EntityList;

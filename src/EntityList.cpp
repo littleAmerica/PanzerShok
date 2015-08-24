@@ -49,3 +49,11 @@ EntityList& EntityList::instance()
 	return el;
 }
 
+void EntityList::kill()
+{
+	for(EntityPtr entity: m_gameObjectList)
+	{
+		entity->kill();
+	}
+}
+

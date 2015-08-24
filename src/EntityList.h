@@ -17,7 +17,7 @@ public:
 
 	virtual void update(float deltaTime); 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);
-
+	virtual void kill();
 	virtual int id();
 
 	void addGameObject(EntityPtr gameObject);

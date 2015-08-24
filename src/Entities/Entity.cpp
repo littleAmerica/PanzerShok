@@ -96,14 +96,14 @@ Rect_t Entity_Base::boundsWord()
 	return global;
 }
 
-void Entity_Base::setTexture(int texture)
-{
-	m_textureID = texture;
-}
-
 PhysicsPtr Entity_Base::body()
 {
 	return m_body;
+}
+
+void Entity_Base::kill()
+{
+
 }
 
 int Entity_Base::ID_counter = 0;

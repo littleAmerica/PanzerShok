@@ -34,6 +34,8 @@ public:
 	//need to figure out what exactly the update wants to get (int?)
 	virtual void update(float deltaTime) = 0; 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL) = 0;
+
+	virtual void kill() = 0;
 	
 	virtual int id() = 0;
 
@@ -54,9 +56,7 @@ public:
 	//the update by default applies friction slow mechanism
 	virtual void update(float deltaTime); 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);
-	
-	//temporary
-	virtual void setTexture(int texture);
+	virtual void kill();
 
 	virtual Vec2	center();
 	float	angle();

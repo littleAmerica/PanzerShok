@@ -13,6 +13,7 @@ class EntityList : public Entity
 
 {
 public:
+	static EntityList& instance();
 
 	virtual void update(float deltaTime); 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);

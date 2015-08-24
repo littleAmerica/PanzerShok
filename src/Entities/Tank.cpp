@@ -5,14 +5,17 @@
 #include <iostream>
 
 
-Tank::Tank(float x, float y)
-	:	Entity_Base(x, y),
+Tank::Tank(Vec2 pos, Tank_Info*tank_info/* = NULL*/):
+	Entity_Base(pos, tank_info),
 	m_state(0)
 {
 	Turret_Info turret_Info;
+	turret_Info.bounds = Rect_t(0, 0, 16, 16);
+	turret_Info.type = Entity_Info::eRigid;
+	turret_Info.textureID = 2;
+
 	Vec2 _center = center();
-	Turret* turret = new Turret(_center.x, _center.y, turret_Info);
-	turret->setTexture(2);
+	Turret* turret = new Turret(_center, turret_Info);
 
 	attachTurret(turret);
 
@@ -25,6 +28,7 @@ Tank::Tank(float x, float y)
 
 void Tank::draw(Screen* pScreen, Camera* pCamera /*= NULL*/)
 {
+	//std::cout << "Dest: " << boundsWord().x << " " << boundsWord().y << "---angle :" << angle() << "\n";
 	Entity_Base::draw(pScreen, pCamera);
 	m_turret->draw(pScreen, pCamera);
 }
@@ -133,4 +137,9 @@ void Tank::fire()
 void Tank::updateState(int state)
 {
 	m_state = state;
+}
+
+int Tank::state()
+{
+	return m_state;
 }

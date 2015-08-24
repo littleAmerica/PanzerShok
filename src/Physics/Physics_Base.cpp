@@ -137,6 +137,11 @@ void Physics_Base::attachPhysics(Physics* other, const Vec2& place)
 	m_pinBodies.reset(new PinBodies(this, _other, place));	
 }
 
+void Physics_Base::setLinearVelocity(Vec2 velocity)
+{
+	m_body->SetLinearVelocity(velocity);
+}
+
 b2Vec2 vec2Tob2vec2(const Vec2& vec)
 {
 	return	b2Vec2(vec.x, vec.y);

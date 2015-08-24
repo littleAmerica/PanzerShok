@@ -14,23 +14,27 @@
 
 #include <iostream>
 
-static PhysicInfo defaultPhysicInfo = {Rect_t(0, 0, 16, 16), 3.14f/2};
+static Physic_Info defaultPhysicInfo = {Rect_t(0, 0, 16, 16), 0};
 
 
-Entity_Base::Entity_Base(float x, float y, Enity_Info* info) 
+Entity_Base::Entity_Base(Vec2 pos, Entity_Info* info) 
 	:m_body(),
-	m_id(ID_counter++)
+	m_id(ID_counter++),
+	m_textureID(1)
 {
-	if (info && info->type == Enity_Info::eKinematic)
+	Physic_Info phys_info = defaultPhysicInfo;
+	if (info)
 	{
-		m_body.reset(new Physics_Kinematic(defaultPhysicInfo, x, y));
+		phys_info.bounds = info->bounds;
+		m_textureID = info->textureID;
 	}
-	m_body.reset(new Physics_Rigid(defaultPhysicInfo, x, y));
-	
+	else
+	{
+		int i = 0;
+	}
+	m_body.reset(new Physics_Rigid(phys_info, pos));
 
 	m_body->setEntityID(m_id);
-
-	m_textureID = 1;
 
 	ASSERT(m_body);
 }

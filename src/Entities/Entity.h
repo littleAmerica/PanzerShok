@@ -13,7 +13,7 @@ class Entity;
 typedef std::shared_ptr<Entity> EntityPtr;
 
 
-struct Enity_Info
+struct Entity_Info
 {
 	enum Type{
 		eRigid,
@@ -21,11 +21,8 @@ struct Enity_Info
 	};
 
 	Type type;
-
-	float engineForce;
-	float Cbraking;
-	float Cdrag;
-	float Crr;
+	Rect_t bounds;
+	int32 textureID;
 };
 
 
@@ -51,7 +48,7 @@ public:
 class Entity_Base: public Entity
 {
 public:
-	Entity_Base(float x, float y, Enity_Info* info = NULL);
+	Entity_Base(Vec2 pos, Entity_Info* info = NULL);
 	virtual ~Entity_Base();
 
 	//the update by default applies friction slow mechanism

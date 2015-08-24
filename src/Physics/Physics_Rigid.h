@@ -13,12 +13,12 @@
 class Physics_Rigid : public Physics_Base
 {
 public:
-	Physics_Rigid(const PhysicInfo&  physicInfo, int x, int y);
+	Physics_Rigid(const Physic_Info& physicInfo, Vec2 pos);
 
 	Rect_t bounds();
 
 private:
-	const PhysicInfo&  m_physicInfo;
+	Physic_Info  m_physicInfo;
 
 	int	m_entityID;
 
@@ -29,12 +29,12 @@ private:
 class Physics_Static : public Physics_Base
 {
 public:
-	Physics_Static(const PhysicInfo&  physicInfo, int x, int y);
+	Physics_Static(const Physic_Info&  physicInfo, Vec2 pos);
 
 	Rect_t bounds();
 
 private:
-	const PhysicInfo&  m_physicInfo;
+	const Physic_Info&  m_physicInfo;
 
 	int	m_entityID;
 
@@ -45,12 +45,12 @@ private:
 class Physics_Kinematic : public Physics_Base
 {
 public:
-	Physics_Kinematic(const PhysicInfo&  physicInfo, int x, int y);
+	Physics_Kinematic(const Physic_Info&  physicInfo, Vec2 pos);
 
 	Rect_t bounds();
 
 private:
-	const PhysicInfo&  m_physicInfo;
+	const Physic_Info&  m_physicInfo;
 
 	int	m_entityID;
 

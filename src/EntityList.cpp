@@ -43,3 +43,9 @@ void EntityList::clear()
 	m_gameObjectList.clear();
 }
 
+EntityList& EntityList::instance()
+{
+	static EntityList el;
+	return el;
+}
+

@@ -59,7 +59,7 @@ private:
 
 	//should we make own singleton class for listeners?
 	std::vector<EventListener*> m_eventListeners;
-	EntityList m_gameObjectList;
+	EntityList* m_gameObjectList;
 
 	Screen*				m_pScreen;
 	Player*				player;

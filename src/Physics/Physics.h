@@ -3,10 +3,11 @@
 
 #include "Utils/Types.h"
 
-struct PhysicInfo
+struct Physic_Info
 {
 	Rect_t	bounds;
 	float angle; //default angle in world coordinate
+	bool isBullet;
 };
 
 class Physics;
@@ -24,7 +25,8 @@ public:
 	virtual void	applyTorque(float torque) = 0;
 	virtual void	applyLinearImpulse(const Vec2& impulse) = 0;
 	virtual void	applyAngularImpulse(float impulse) = 0;
-	virtual	void	stopMoving() = 0;
+	virtual void	stopMoving() = 0;
+	virtual void	setLinearVelocity(Vec2 velocity) = 0;
 
 	virtual void	setAngle(float angle) = 0;
 
@@ -44,6 +46,13 @@ public:
 	virtual Rect_t	bounds() = 0;
 
 	virtual void	attachPhysics(Physics* other, const Vec2& place) = 0; //make a join
+};
+
+
+class PhysicsFactory
+{
+public:
+	virtual PhysicsPtr generatePhysics(Physic_Info* physicInfo) = 0; //generate physics
 };
 
 

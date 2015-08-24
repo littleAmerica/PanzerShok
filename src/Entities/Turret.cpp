@@ -1,11 +1,11 @@
 #include "Turret.h"
-
-#include "States.h"
+#include "Bullet.h"
+#include "EntityList.h"
 #include <math.h>
+#include <iostream>
 
-
-Turret::Turret(float x, float y, const Turret_Info& info)
-	:Entity_Base(x, y)
+Turret::Turret(Vec2 pos, Turret_Info& info) :
+	Entity_Base(pos, &info)
 {
 	
 }
@@ -24,5 +24,18 @@ void Turret::lookAt(Vec2 coord)
 
 void Turret::fire()
 {
+	Bullet_Info info;
+	info.type = Entity_Info::eRigid;
+	info.bounds = Rect_t(0, 0, 8, 8);
+	EntityPtr bullet = EntityPtr(new Bullet(firePlace(), angle(), &info));
+	EntityList::instance().addGameObject(bullet);
+}
 
+Vec2 Turret::firePlace()
+{
+	Rect_t _bounds = bounds();
+	float _angle = angle();
+	Vec2 firePlace = center() + Vec2(-sin(_angle) * 12, cos(_angle) * 12);
+
+	return firePlace;
 }

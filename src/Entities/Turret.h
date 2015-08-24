@@ -6,6 +6,7 @@
 #include <memory>
 
 struct Turret_Info
+	: public Entity_Info
 {
 
 };
@@ -17,10 +18,12 @@ class Turret
 	: public Entity_Base
 {
 public:
-	Turret(float x, float y, const Turret_Info& info); 	
+	Turret(Vec2 pos, Turret_Info& info); 	
 	virtual void lookAt(Vec2 coord);
 	virtual void fire();
 protected:
+	virtual Vec2 firePlace(); // the place from which the bullet starts moving (end of the cannon)
+
 	Vec2 m_lookAt;
 };
 

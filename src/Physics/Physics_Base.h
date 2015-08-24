@@ -18,6 +18,7 @@ public:
 	virtual void	applyTorque(float torque);
 	virtual void	applyLinearImpulse(const Vec2& impulse);
 	virtual void	applyAngularImpulse(float impulse);
+	virtual void	setLinearVelocity(Vec2 velocity);
 
 	virtual void	setAngle(float angle);
 

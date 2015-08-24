@@ -68,11 +68,13 @@ void Game::init()
 					
 	player = new Player(100, 100);
 	m_eventListeners.push_back(player);
-	m_gameObjectList.addGameObject(EntityPtr(player));
+	m_gameObjectList = &EntityList::instance();
+	m_gameObjectList->addGameObject(player->entity());
 
 	//TODO move to resource manager
-	m_textureManager->LoadTexture(kResourceFolder + "tank1.png",1);
-	m_textureManager->LoadTexture(kResourceFolder + "turret1.png",2);
+	m_textureManager->LoadTexture(kResourceFolder + "tank1.png", 1);
+	m_textureManager->LoadTexture(kResourceFolder + "turret1.png", 2);
+	m_textureManager->LoadTexture(kResourceFolder + "bullet1.png", 3);
 
 	m_eventListeners.push_back(this);
 }
@@ -82,7 +84,7 @@ void Game::render()
 	//m_pCamera->setCenter(player->center());
 
 	m_pScreen->clear();
-	m_gameObjectList.draw(m_pScreen, m_cameraManager->activeCamera().get());
+	m_gameObjectList->draw(m_pScreen, m_cameraManager->activeCamera().get());
 	m_pScreen->swapBuffer();
 }
 
@@ -90,7 +92,7 @@ void Game::update(float timeStep)
 {
 	m_physEngine->step(1.f/60);
 
-	m_gameObjectList.update(timeStep); 
+	m_gameObjectList->update(timeStep); 
 }
 
 void Game::handleEvents()
@@ -106,7 +108,7 @@ void Game::handleEvents()
 void Game::clean()
 {
 	m_eventListeners.clear();
-	m_gameObjectList.clear();
+	m_gameObjectList->clear();
 	
 	m_physEngine->clean();
 	m_renderEngine->clean();	
@@ -172,8 +174,8 @@ void Game::OnLButtonDown(int mX, int mY)
 {
 	//Vec2 word = camera()->camera2world(Vec2(mX, mY));
 
-	Enity_Info info = {Enity_Info::eKinematic, 0, 0, 0, 0};
-	m_gameObjectList.addGameObject(EntityPtr(new Entity_Base(mX, mY, &info)));
+	//Entity_Info info = {Entity_Info::eKinematic, Rect_t(0, 0, 32, 32), 1};
+	//m_gameObjectList->addGameObject(EntityPtr(new Entity_Base(Vec2(mX, mY), &info)));
 }
 
 //

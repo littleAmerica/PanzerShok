@@ -5,15 +5,28 @@
 #include "Turret.h"
 #include "EventListener.h"
 
+class Tank_Info : public Entity_Info
+{
+	float engineForce;
+	float Cbraking;
+	float Cdrag;
+	float Crr;
+};
+
+class Tank;
+typedef std::shared_ptr<Tank> TankPtr;
+
 class Tank	:
 	public Entity_Base
 {
 public:
-	Tank(float x, float y);	
+	Tank(Vec2 pos, Tank_Info* = NULL);	
 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL); 
 	virtual void update(float deltaTime);
+	
 	virtual void updateState(int state);
+	virtual int state();
 
 	virtual void lookAt(Vec2 coord);
 	virtual void fire();

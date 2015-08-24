@@ -42,7 +42,18 @@ void Player::OnKeyUp(SDL_Keycode sym, Uint16 mod)
 
 Player::Player(float x, float y)
 {
-	m_tank.reset(new Tank(Vec2(x, y)));
+	Tank_Info tank_info;
+	tank_info.bounds = Rect_t(0, 0, 8, 8);
+
+	tank_info.engineForce = 5000;
+	tank_info.Cbraking = 2000;
+	tank_info.Cdrag = 0.0;
+	tank_info.Crr = 0;
+	tank_info.textureID = 1;
+	tank_info.type = Entity_Info::eRigid;
+
+
+	m_tank.reset(new Tank(Vec2(x, y), &tank_info));
 }
 
 

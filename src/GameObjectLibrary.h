@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-#include "Singleton.h"
+#include "Utils/Singleton.h"
 
 class GameObject;
 

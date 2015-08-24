@@ -38,3 +38,22 @@ int EntityList::id()
 	return 0;
 }
 
+void EntityList::clear()
+{
+	m_gameObjectList.clear();
+}
+
+EntityList& EntityList::instance()
+{
+	static EntityList el;
+	return el;
+}
+
+void EntityList::kill()
+{
+	for(EntityPtr entity: m_gameObjectList)
+	{
+		entity->kill();
+	}
+}
+

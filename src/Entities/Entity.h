@@ -7,17 +7,22 @@
 
 class Camera;
 class Screen;
+class TextureManager;
 
 class Entity;
 typedef std::shared_ptr<Entity> EntityPtr;
 
 
-struct Enity_Info
+struct Entity_Info
 {
-	float engineForce;
-	float Cbraking;
-	float Cdrag;
-	float Crr;
+	enum Type{
+		eRigid,
+		eKinematic
+	};
+
+	Type type;
+	Rect_t bounds;
+	int32 textureID;
 };
 
 
@@ -29,6 +34,8 @@ public:
 	//need to figure out what exactly the update wants to get (int?)
 	virtual void update(float deltaTime) = 0; 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL) = 0;
+
+	virtual void kill() = 0;
 	
 	virtual int id() = 0;
 
@@ -43,64 +50,34 @@ public:
 class Entity_Base: public Entity
 {
 public:
-	Entity_Base(float x, float y, Enity_Info* info = NULL);
+	Entity_Base(Vec2 pos, Entity_Info* info = NULL);
 	virtual ~Entity_Base();
 
 	//the update by default applies friction slow mechanism
 	virtual void update(float deltaTime); 
-	void draw(Screen* pScreen, Camera* pCamera = NULL);
-	
+	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);
+	virtual void kill();
 
 	virtual Vec2	center();
 	float	angle();
 	virtual Rect_t	bounds();
 	virtual Rect_t boundsWord();
-
+	virtual PhysicsPtr body();
+	
 	virtual	int id();
 
 protected:
-	virtual void	updateFriction();
 
-	std::shared_ptr<Physics> m_body;
+	PhysicsPtr m_body;
 
-	float m_EngineForce;
-	float m_Cbraking;
-	
-	float m_Cdrag;		//Air Drag Constant
-	float m_Crr; // Rolling Resistance Constant
+	int m_textureID;
 
 	const int m_id;	
 	static int ID_counter;
 
 	An<PhysEngine>	m_physEngine;
+	An<TextureManager> m_textureManager;
 };
 
-
-//class Entity_Actor: public Entity
-//{
-//public:
-//	Entity_Actor(int x = 100, int y = 100);
-//	virtual ~Entity_Actor();
-//
-//	//the update by default applies friction slow mechanism
-//	virtual void update(float deltaTime); 
-//	virtual void draw();
-//
-//
-//	Vec2	center();
-//	float	angle();
-//	Rect_t	bounds();
-//
-//protected:
-//	virtual void	updateFriction();
-//
-//	Physics_Rigid m_body;
-//
-//	float m_maxForwardSpeed;
-//	float m_maxBackwardSpeed;
-//	float m_maxDriveForce;
-//
-//	An<PhysEngine>	m_physEngine;
-//};
 
 #endif

@@ -4,25 +4,27 @@
 #include <vector>
 #include <memory>
 
-#include "Entity.h"
+#include "Entities/Entity.h"
 
 class Enity;
 typedef std::shared_ptr<Entity> EntityPtr;
 
 class EntityList : public Entity
+
 {
 public:
+	static EntityList& instance();
 
 	virtual void update(float deltaTime); 
 	virtual void draw(Screen* pScreen, Camera* pCamera = NULL);
-
+	virtual void kill();
 	virtual int id();
 
 	void addGameObject(EntityPtr gameObject);
 	EntityPtr getNthGameObject(size_t index) const;
 	size_t GetSize() const;
 
-
+	virtual void clear();
 private:
 	//hold all gameObjects
 	//We can consider rewriting this in case 

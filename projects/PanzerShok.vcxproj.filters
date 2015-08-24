@@ -5,7 +5,6 @@
     <ClCompile Include="..\src\EventListener.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\RenderEngine.cpp" />
     <ClCompile Include="..\src\Texture.cpp" />
     <ClCompile Include="..\src\Timer.cpp" />
@@ -13,22 +12,38 @@
       <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="..\src\EntityList.cpp" />
-    <ClCompile Include="..\src\Entity.cpp" />
     <ClCompile Include="..\src\Physics\Physics_Rigid.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Screen.cpp" />
+    <ClCompile Include="..\src\Physics\Physics_Base.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Physics\Joint.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TextureManager.cpp" />
+    <ClCompile Include="..\src\Entities\Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entities\Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entities\Turret.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entities\Tank.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Camera.h" />
     <ClInclude Include="..\src\EventListener.h" />
     <ClInclude Include="..\src\Game.h" />
-    <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\RenderEngine.h" />
-    <ClInclude Include="..\src\Singleton.h" />
     <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\Texture.h" />
     <ClInclude Include="..\src\Timer.h" />
-    <ClInclude Include="..\src\Types.h" />
     <ClInclude Include="..\src\Physics\Physics.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -36,14 +51,57 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\src\EntityList.h" />
-    <ClInclude Include="..\src\Entity.h" />
     <ClInclude Include="..\src\Physics\Physics_Rigid.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Screen.h" />
+    <ClInclude Include="..\src\Physics\Physics_Base.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Physics\Joint.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TextureManager.h" />
+    <ClInclude Include="..\src\Utils\Asserts.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\Resources.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\SDL_platform.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\Box2D_platform.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\Types.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Utils\Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entities\Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entities\Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entities\Turret.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entities\Tank.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Physics">
       <UniqueIdentifier>{32a249a4-e491-4464-83a3-418c86176043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{789f3968-cfd8-4c41-acb5-678c6dbe89a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{3ad7bddc-fd18-4227-8251-1579881459cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

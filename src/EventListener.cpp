@@ -1,5 +1,5 @@
 #include "EventListener.h"
-
+#include "Camera.h"
 
 EventListener::EventListener() {
 }
@@ -45,17 +45,24 @@ void EventListener::OnEvent(SDL_Event* event) {
 				}
 
 	case SDL_MOUSEMOTION: {
-		OnMouseMove(event->motion.x, event->motion.y, event->motion.xrel, event->motion.yrel, 
-			(event->motion.state& SDL_BUTTON(SDL_BUTTON_LEFT)) !=0,
-			(event->motion.state&SDL_BUTTON(SDL_BUTTON_RIGHT))!=0,
-			(event->motion.state&SDL_BUTTON(SDL_BUTTON_MIDDLE)) !=0);
+		//temporary until EventListener isn't re-built
+		CameraPtr activeCamera = CameraManager::Instance().activeCamera();
+		Vec2 worlds = activeCamera->camera2world(Vec2(event->motion.x, event->motion.y));
+		OnMouseMove(worlds.x, worlds.y, event->motion.xrel, event->motion.yrel, 
+			(event->motion.state & SDL_BUTTON(SDL_BUTTON_LEFT)) !=0,
+			(event->motion.state &SDL_BUTTON(SDL_BUTTON_RIGHT))!=0,
+			(event->motion.state &SDL_BUTTON(SDL_BUTTON_MIDDLE)) !=0);
 		break;
 						  }
 
 	case SDL_MOUSEBUTTONDOWN: {
 		switch(event->button.button) {
 		case SDL_BUTTON_LEFT: {
-			OnLButtonDown(event->button.x, event->button.y);
+			//temporary until EventListener isn't re-built
+			CameraPtr activeCamera = CameraManager::Instance().activeCamera();
+			Vec2 worlds = activeCamera->camera2world(Vec2(event->button.x, event->button.y));
+
+			OnLButtonDown(worlds.x, worlds.y);
 			break;
 						  		}
 		case SDL_BUTTON_RIGHT: {
